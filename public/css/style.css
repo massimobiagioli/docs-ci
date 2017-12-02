@@ -1,0 +1,28 @@
+/* =================================
+ * Login
+ * ================================= */
+.error-messages {
+    color: #f00;
+    background-color: #FAEBEB;
+    border: 1px solid #f00;
+}
+.error-messages ul {
+    list-style-type: none;
+    margin-bottom: 0;
+    padding-left: 0;
+}
+
+/* =================================
+ * Navigation
+ * ================================= */
+nav span.logged-user {
+    font-size: 0.6em;
+    font-weight: bold;
+}
+
+/* =================================
+ * Common Pages
+ * ================================= */
+.content-wrapper {
+    padding-top: 70px;
+}
