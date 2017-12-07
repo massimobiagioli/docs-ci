@@ -13,6 +13,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $hook['pre_system'] = function() {
     require 'vendor/autoload.php';
-    $dotenv = new Dotenv\Dotenv(APPPATH);
-    $dotenv->load();
+    if (file_exists(APPPATH . '.env')) {
+        $dotenv = new Dotenv\Dotenv(APPPATH);
+        $dotenv->load();        
+    }
 };
