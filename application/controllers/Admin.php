@@ -6,7 +6,7 @@ class Admin extends CI_Controller {
 
     public function index() {
         $logged_user = $this->session->userdata('logged_user');
-        if (!$logged_user) {
+        if (!$logged_user || $logged_user['user_admin'] == 0) {
             redirect('/');
             return;
         }
@@ -30,11 +30,31 @@ class Admin extends CI_Controller {
     }
 
     public function migrate() {
+        $logged_user = $this->session->userdata('logged_user');
+        if (!$logged_user || $logged_user['user_admin'] == 0) {
+            redirect('/');
+            return;
+        }
+        
         $this->load->library('migration');
 
         if ($this->migration->current() === FALSE) {
             show_error($this->migration->error_string());
         }
     }
-
+    
+    public function create_index() {
+        $logged_user = $this->session->userdata('logged_user');
+        if (!$logged_user || $logged_user['user_admin'] == 0) {
+            redirect('/');
+            return;
+        }
+        
+        $this->load->library('dms_factory');
+        $client = $this->dms_factory->client('elastic');
+        $result = $client->create_index('demo');
+        echo var_dump($result);
+        
+    }
+    
 }
