@@ -26,7 +26,10 @@ class Admin extends CI_Controller {
         $this->load->view('admin', $data);
         
         // Footer
-        $this->view_manager->load_footer();
+        $footer_data = [
+            'custom_scripts' => ['admin.js']
+        ];
+        $this->view_manager->load_footer($footer_data);
     }
 
     public function migrate() {

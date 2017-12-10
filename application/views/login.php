@@ -17,12 +17,10 @@
                 'name' => $this->security->get_csrf_token_name(),
                 'hash' => $this->security->get_csrf_hash()
             ];
-            $ci_token = uniqid('CI::');
             ?>
             
             <div>
                 <input type="hidden" name="<?php echo $csrf['name']; ?>" value="<?php echo $csrf['hash']; ?>">
-                <input type="hidden" name="sender" value="<?php echo $ci_token; ?>">
             </div>
             
             <!-- Login -->

@@ -26,3 +26,22 @@ nav span.logged-user {
 .content-wrapper {
     padding-top: 70px;
 }
+
+/* =================================
+ * Admin
+ * ================================= */
+.admin-item-wrapper {
+    border: 1px solid black;
+    background-color: #F8F9FA;
+}
+.admin-item-wrapper h3 {
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.admin-item-icon {
+    text-align: center;
+}
+.admin-item-params-buttons {
+    text-align: center;
+}
