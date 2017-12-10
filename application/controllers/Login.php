@@ -23,21 +23,16 @@ class Login extends CI_Controller {
     }
     
     public function verify() {
-        $this->load->model('user_model');
-        
         // Get post data
         $login = $this->input->post('login');
         $password = $this->input->post('password');
         
         // Load user model
-        $result = $this->user_model->get([
-            'user_login' => $login,
-            'user_password' => hash('sha256', $password . USER_PASSWORD_SALT)
-        ]);
+        $result = $this->auth->get_user($login, $password);
         
         // Store logged user in session
         if ($result) {
-            $this->session->set_userdata(['logged_user' => $result[0]]);
+            $this->session->set_userdata(['logged_user' => $result]);
             $this->ignition_client->addMessage([
                 'type' => 'location',
                 'metadata' => [

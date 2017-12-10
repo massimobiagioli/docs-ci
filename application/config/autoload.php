@@ -58,8 +58,8 @@ $autoload['packages'] = array();
 |
 |	$autoload['libraries'] = array('user_agent' => 'ua');
 */
-$autoload['libraries'] = array('database', 'session', 'form_validation', 
-    'ignition_client', 'view_manager');
+$autoload['libraries'] = array('database', 'session', 
+    'form_validation', 'ignition_client', 'view_manager', 'auth');
 
 /*
 | -------------------------------------------------------------------
@@ -90,7 +90,7 @@ $autoload['drivers'] = array();
 |
 |	$autoload['helper'] = array('url', 'file');
 */
-$autoload['helper'] = array('url');
+$autoload['helper'] = array('url', 'dms_helper');
 
 /*
 | -------------------------------------------------------------------
@@ -104,7 +104,7 @@ $autoload['helper'] = array('url');
 | config files.  Otherwise, leave it blank.
 |
 */
-$autoload['config'] = array();
+$autoload['config'] = array('docs');
 
 /*
 | -------------------------------------------------------------------

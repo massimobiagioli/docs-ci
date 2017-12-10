@@ -11,6 +11,20 @@
               action="<?= site_url('login/verify') ?>"
               data-update="login_error_messages">
             
+            <!-- Security -->
+            <?php
+            $csrf = [
+                'name' => $this->security->get_csrf_token_name(),
+                'hash' => $this->security->get_csrf_hash()
+            ];
+            $ci_token = uniqid('CI::');
+            ?>
+            
+            <div>
+                <input type="hidden" name="<?php echo $csrf['name']; ?>" value="<?php echo $csrf['hash']; ?>">
+                <input type="hidden" name="sender" value="<?php echo $ci_token; ?>">
+            </div>
+            
             <!-- Login -->
             <div class="form-group">
                 <label for="login"><?php echo $this->lang->line('Login'); ?></label>
