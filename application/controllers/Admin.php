@@ -22,6 +22,12 @@ class Admin extends CI_Controller {
         ];
         $data['navbar'] = $this->view_manager->get_fragment('navbar', $navbar_data);
         
+        // Result
+        $data['admin_result'] = $this->view_manager->get_fragment('admin_result');
+        
+        // Error Messages
+        $data['admin_error_messages'] = $this->view_manager->get_fragment('admin_error_messages');
+        
         // Home
         $this->load->view('admin', $data);
         

@@ -1,18 +1,4 @@
 /* =================================
- * Login
- * ================================= */
-.error-messages {
-    color: #f00;
-    background-color: #FAEBEB;
-    border: 1px solid #f00;
-}
-.error-messages ul {
-    list-style-type: none;
-    margin-bottom: 0;
-    padding-left: 0;
-}
-
-/* =================================
  * Navigation
  * ================================= */
 nav span.logged-user {
@@ -25,6 +11,24 @@ nav span.logged-user {
  * ================================= */
 .content-wrapper {
     padding-top: 70px;
+}
+.error-messages {
+    color: #f00;
+    background-color: #FAEBEB;
+    border: 1px solid #f00;
+}
+.result {
+    color: #0f0;
+    background-color: #F0FFFF;
+    border: 1px solid #0f0;
+}
+.error-messages div,
+.result div {
+    word-break: break-all;
+}
+.error-messages ul li,
+.result ul li {
+    display: inline-block;
 }
 
 /* =================================

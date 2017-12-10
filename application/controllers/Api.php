@@ -22,10 +22,14 @@ class Api extends CI_Controller {
         
         // Invoke dms
         $dms = get_dms();
-        $result = $dms->create_index('demo');
+        $result = $dms->create_index($index_name);
+        if (!$result) {
+            $this->handle_internal_error($dms->last_error_code(), $dms->last_error_description());
+            return;
+        }
         
         // Handle result
-        echo var_dump($result);
+        $this->handle_result($result);
     }
     
     private function handle_missing_auth_error() {
@@ -38,9 +42,32 @@ class Api extends CI_Controller {
     
     private function handle_bad_parameters($error_text) {
         if ($this->auth->is_ci_request()) {
-            // TODO
+            $this->ignition_client->set_fragment_data('admin_error_messages', ['error_messages' => [$error_text]]);
+            $this->ignition_client->xmlResponse();
         } else {
             $this->output->set_status_header(400, $error_text);
+        }
+    }
+    
+    private function handle_internal_error($error_code, $error_description) {
+        $error_string = $error_code . ' - ' . $error_description;
+        if ($this->auth->is_ci_request()) {
+            $this->ignition_client->set_fragment_data('admin_error_messages', ['error_messages' => [$error_string]]);
+            $this->ignition_client->xmlResponse();
+        } else {
+            $this->output->set_status_header(5001, $error_string);
+        }
+    }
+    
+    private function handle_result($result) {
+        if ($this->auth->is_ci_request()) {
+            $this->ignition_client->set_fragment_data('admin_result', ['result' => $result]);
+            $this->ignition_client->xmlResponse();
+        } else {
+            $this->output
+                    ->set_status_header(200)
+                    ->set_content_type('application/json')
+                    ->set_output(json_encode($result));
         }
     }
     

@@ -24,14 +24,32 @@ var Ignition = (function() {
             params += 'update=' + $sender.data('update');
         }
         
-        $.post(action, params, function(data) {
-            var xml = $(data);
+//        $.post(action, params, function(data) {
+//            var xml = $(data);
+//
+//            // Update Fragments
+//            updateFragments(xml.find('fragments'));
+//
+//            // Process Messages
+//            processMessages(xml.find('messages'));
+//        });
+        
+        $.ajax({
+            url: action,
+            type: 'post',
+            data: params,
+            headers: {
+                'X-API-KEY': '123456789'
+            },
+            success: function(data) {
+                var xml = $(data);
 
-            // Update Fragments
-            updateFragments(xml.find('fragments'));
+                // Update Fragments
+                updateFragments(xml.find('fragments'));
 
-            // Process Messages
-            processMessages(xml.find('messages'));
+                // Process Messages
+                processMessages(xml.find('messages'));
+            }
         });
     };
     
