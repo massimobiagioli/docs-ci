@@ -14,6 +14,13 @@ interface Dms {
     public function create_index($index_name);
     
     /**
+     * Delete index
+     * @param string $index_name Index name
+     * @return array Operation info
+     */
+    public function delete_index($index_name);
+    
+    /**
      * @return Last error code
      */
     public function last_error_code();

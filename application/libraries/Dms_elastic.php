@@ -43,6 +43,17 @@ class Dms_elastic extends Dms_super implements Dms {
             $this->set_error($e->getCode(), $e->getMessage());
         }
     }
+    
+    public function delete_index($index_name) {
+        try {
+            $response = $this->client->indices()->delete([
+                'index' => $index_name
+            ]);
+            return $response;
+        } catch (Exception $e) {
+            $this->set_error($e->getCode(), $e->getMessage());
+        }
+    }
 
 }
 

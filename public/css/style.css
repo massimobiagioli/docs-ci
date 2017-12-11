@@ -37,15 +37,17 @@ nav span.logged-user {
 .admin-item-wrapper {
     border: 1px solid black;
     background-color: #F8F9FA;
+    height: 100%;
 }
 .admin-item-wrapper h3 {
     text-align: center;
     font-weight: bold;
+    font-size: 1.2em;
     text-transform: uppercase;
 }
 .admin-item-icon {
     text-align: center;
 }
-.admin-item-params-buttons {
+.admin-item-buttons {
     text-align: center;
 }
