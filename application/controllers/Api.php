@@ -30,7 +30,7 @@ class Api extends CI_Controller {
         }
         
         // Handle result
-        $this->handle_result($this->lang->line('Index_created'), $result);
+        $this->handle_result($this->lang->line('index_created'), $result);
     }
     
     public function delete_index() {
@@ -59,7 +59,7 @@ class Api extends CI_Controller {
         }
         
         // Handle result
-        $this->handle_result($this->lang->line('Index_deleted'), $result);
+        $this->handle_result($this->lang->line('index_deleted'), $result);
     }
     
     private function handle_missing_auth_error() {

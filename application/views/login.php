@@ -25,19 +25,19 @@
             
             <!-- Login -->
             <div class="form-group">
-                <label for="login"><?php echo $this->lang->line('Login'); ?></label>
+                <label for="login"><?php echo $this->lang->line('login'); ?></label>
                 <input type="text" name="login" class="form-control" required>
             </div>
             
             <!-- Password -->
             <div class="form-group">
-                <label for="password"><?php echo $this->lang->line('Password'); ?></label>
+                <label for="password"><?php echo $this->lang->line('password'); ?></label>
                 <input type="password" name="password" class="form-control" required>
             </div>
             
             <!-- Buttons -->
             <div class="form-group mt-4">
-                <input type="submit" value="<?php echo $this->lang->line('Login'); ?>" class="btn btn-primary">
+                <input type="submit" value="<?php echo $this->lang->line('login'); ?>" class="btn btn-primary">
             </div>
             
         </form>

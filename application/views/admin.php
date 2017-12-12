@@ -14,7 +14,7 @@
         <!-- CREATE INDEX -->
         <div class="col-sm-6 col-md-4 mt-4">
             <div class="admin-item-wrapper p-2">
-                <h3><?php echo $this->lang->line('Index_creation'); ?></h3>
+                <h3><?php echo $this->lang->line('index_creation'); ?></h3>
                 <div class="admin-item-content">
                     <div class="admin-item-icon">
                         <i class="fa fa-plus-circle fa-4x" aria-hidden="true"></i>
@@ -33,13 +33,13 @@
                             
                             <!-- Index name -->
                             <div class="form-group">
-                                <label for="index_name"><?php echo $this->lang->line('Index_name'); ?></label>
+                                <label for="index_name"><?php echo $this->lang->line('index_name'); ?></label>
                                 <input type="text" name="index_name" class="form-control" required>
                             </div>
                             
                             <!-- Buttons -->
                             <div class="admin-item-buttons form-group mt-4">
-                                <input type="submit" value="<?php echo $this->lang->line('Create_index'); ?>" class="btn btn-primary">
+                                <input type="submit" value="<?php echo $this->lang->line('create_index'); ?>" class="btn btn-primary">
                             </div>
                             
                         </form>
@@ -51,7 +51,7 @@
         <!-- DELETE INDEX -->
         <div class="col-sm-6 col-md-4 mt-4">
             <div class="admin-item-wrapper p-2">
-                <h3><?php echo $this->lang->line('Index_deletion'); ?></h3>
+                <h3><?php echo $this->lang->line('index_deletion'); ?></h3>
                 <div class="admin-item-content">
                     <div class="admin-item-icon">
                         <i class="fa fa-minus-circle fa-4x" aria-hidden="true"></i>
@@ -70,13 +70,13 @@
                             
                             <!-- Index name -->
                             <div class="form-group">
-                                <label for="index_name"><?php echo $this->lang->line('Index_name'); ?></label>
+                                <label for="index_name"><?php echo $this->lang->line('index_name'); ?></label>
                                 <input type="text" name="index_name" class="form-control" required>
                             </div>
                             
                             <!-- Buttons -->
                             <div class="admin-item-buttons form-group mt-4">
-                                <input type="submit" value="<?php echo $this->lang->line('Delete_index'); ?>" class="btn btn-primary">
+                                <input type="submit" value="<?php echo $this->lang->line('delete_index'); ?>" class="btn btn-primary">
                             </div>
                             
                         </form>
@@ -88,7 +88,7 @@
         <!-- MIGRATIONS -->
         <div class="col-sm-6 col-md-4 mt-4">
             <div class="admin-item-wrapper p-2">
-                <h3><?php echo $this->lang->line('Migrations'); ?></h3>
+                <h3><?php echo $this->lang->line('migrations'); ?></h3>
                 <div class="admin-item-content">
                     <div class="admin-item-icon">
                         <i class="fa fa-database fa-4x" aria-hidden="true"></i>
@@ -107,7 +107,7 @@
                             
                             <!-- Buttons -->
                             <div class="admin-item-buttons form-group mt-4">
-                                <input type="submit" value="<?php echo $this->lang->line('Execute'); ?>" class="btn btn-primary">
+                                <input type="submit" value="<?php echo $this->lang->line('execute'); ?>" class="btn btn-primary">
                             </div>
                             
                         </form>

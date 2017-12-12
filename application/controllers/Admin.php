@@ -50,7 +50,7 @@ class Admin extends CI_Controller {
         if ($this->migration->current() === FALSE) {
             $this->ignition_client->set_fragment_data('admin_error_messages', ['error_messages' => [$this->migration->error_string()]]);
         } else {
-            $this->ignition_client->set_fragment_data('admin_result', ['result' => $this->lang->line('Migrations_executed')]);
+            $this->ignition_client->set_fragment_data('admin_result', ['result' => $this->lang->line('migrations_executed')]);
         }
         $this->ignition_client->xmlResponse();
     }

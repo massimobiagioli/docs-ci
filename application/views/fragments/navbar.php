@@ -9,7 +9,7 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item <?php echo ($current === 'home' ? 'active' : '');  ?>">
-                <a class="nav-link" href="<?php echo site_url('home'); ?>"><?php echo $this->lang->line('Home'); ?>
+                <a class="nav-link" href="<?php echo site_url('home'); ?>"><?php echo $this->lang->line('home'); ?>
                     <?php if($current === 'home'): ?>
                         <span class="sr-only">(current)</span>
                     <?php endif; ?>
@@ -18,7 +18,7 @@
             
             <?php if($logged_user['user_admin'] === '1'): ?>
                 <li class="nav-item <?php echo ($current === 'admin' ? 'active' : '');  ?>">
-                    <a class="nav-link" href="<?php echo site_url('admin'); ?>"><?php echo $this->lang->line('Administration'); ?>
+                    <a class="nav-link" href="<?php echo site_url('admin'); ?>"><?php echo $this->lang->line('administration'); ?>
                         <?php if($current === 'admin'): ?>
                             <span class="sr-only">(current)</span>
                         <?php endif; ?>
@@ -27,7 +27,7 @@
             <?php endif; ?>
             
             <li class="nav-item">
-                <a class="nav-link" href="<?php echo site_url('home/logout'); ?>"><?php echo $this->lang->line('Logout'); ?></a>
+                <a class="nav-link" href="<?php echo site_url('home/logout'); ?>"><?php echo $this->lang->line('logout'); ?></a>
             </li>
         </ul>
     </div>

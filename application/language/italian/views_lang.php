@@ -1,22 +1,22 @@
 <?php
 
 // Navbar
-$lang['Administration'] = 'Amministrazione';
-$lang['Home'] = 'Panoramica';
-$lang['Logout'] = 'Esci';
+$lang['administration'] = 'Amministrazione';
+$lang['home'] = 'Panoramica';
+$lang['logout'] = 'Esci';
 
 // Login
-$lang['Login'] = 'Login';
-$lang['Password'] = 'Password';
+$lang['login'] = 'Login';
+$lang['password'] = 'Password';
 
 // Admin
-$lang['Index_creation'] = 'Creazione indice';
-$lang['Create_index'] = 'Crea indice';
-$lang['Index_name'] = 'Nome indice';
-$lang['Index_created'] = 'Indice creato';
-$lang['Index_deletion'] = 'Cancellazione indice';
-$lang['Delete_index'] = 'Cancella indice';
-$lang['Index_deleted'] = 'Indice cancellato';
-$lang['Migrations'] = 'Migrations';
-$lang['Execute'] = 'Esegui';
-$lang['Migrations_executed'] = 'Migrations eseguite';
+$lang['index_creation'] = 'Creazione indice';
+$lang['create_index'] = 'Crea indice';
+$lang['index_name'] = 'Nome indice';
+$lang['index_created'] = 'Indice creato';
+$lang['index_deletion'] = 'Cancellazione indice';
+$lang['delete_index'] = 'Cancella indice';
+$lang['index_deleted'] = 'Indice cancellato';
+$lang['migrations'] = 'Migrations';
+$lang['execute'] = 'Esegui';
+$lang['migrations_executed'] = 'Migrations eseguite';
