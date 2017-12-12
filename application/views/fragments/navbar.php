@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
     <a class="navbar-brand">
         <img src="<?php echo base_url() . 'public/img/logo.png'; ?>" width="40" height="40" class="d-inline-block align-middle" alt="logo">
-        <span class="logged-user ml-5"><?php echo $logged_user['user_login']; ?></span>
+        <span class="logged-user ml-5"><i class="fa fa-user mr-2" aria-hidden="true"></i><?php echo $logged_user['user_login']; ?></span>
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
