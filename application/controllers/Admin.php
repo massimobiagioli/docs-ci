@@ -3,7 +3,16 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Admin extends CI_Controller {
-
+    
+    public function test() {
+        $storage = get_storage();
+        $link = $storage->upload('data://text/plain;base64,SSBsb3ZlIFBIUAo=');
+        $this->output
+                    ->set_status_header(200)
+                    ->set_content_type('application/json')
+                    ->set_output($link);
+    }
+    
     public function index() {
         $logged_user = $this->session->userdata('logged_user');
         if (!$logged_user || $logged_user['user_admin'] == 0) {

@@ -7,5 +7,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | -------------------------------------------------------------------
  */
 $config = [
-    'dms_provider' => 'elastic'
+    'dms_provider' => 'elastic',
+    'storage_provider' => 'filestack'
 ];
