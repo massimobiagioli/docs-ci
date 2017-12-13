@@ -2,13 +2,16 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+use Ramsey\Uuid\Uuid;
+
 class Api extends CI_Controller {
     
     public function test_upload() {
+        $display = print_r($_FILES, true);
         $this->output
                     ->set_status_header(200)
                     ->set_content_type('application/json')
-                    ->set_output(json_encode(json_encode($_FILES)));
+                    ->set_output($display);
     }
     
     public function create_index() {
@@ -67,6 +70,40 @@ class Api extends CI_Controller {
         
         // Handle result
         $this->handle_result($this->lang->line('index_deleted'), $result);
+    }
+    
+    public function upload_document() {
+        // Check auth
+        $user = $this->auth->get_user();
+        if (!$user || !$this->auth->is_user_admin($user)) {
+            $this->handle_missing_auth_error();
+            return;
+        }
+        
+        // Check params
+        $file_to_upload = $_FILES['file_to_upload'];
+        if (!$file_to_upload) {
+            $this->handle_bad_parameters(
+                    $this->lang->line('error_missing_parameter') . ': file_to_upload');
+            return;
+        }
+        
+        // Invoke storage
+        $storage = get_storage();
+        $uuid4 = Uuid::uuid4();
+        $filename = $uuid4->toString();
+        $result = $storage->upload($file_to_upload['tmp_name'], $filename);
+        if (!$result) {
+            $this->handle_internal_error($this->lang->line('error_upload_document'),
+                    $storage->last_error_code(), $storage->last_error_description());
+            return;
+        }
+        
+        // Invoke DMS
+        // TODO ...
+        
+        // Handle result
+        $this->handle_result($this->lang->line('document_uploaded'), $result);
     }
     
     private function handle_missing_auth_error() {

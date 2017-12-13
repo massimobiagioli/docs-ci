@@ -22,9 +22,9 @@ class Storage_filestack extends Storage_super implements Storage {
         $this->client = new FilestackClient(getenv('FILESTACK_APIKEY'));
     }
 
-    public function upload($path) {
+    public function upload($path, $filename) {
         try {
-            $link = $this->client->uploadUrl($path);
+            $link = $this->client->upload($path, ['filename' => $filename]);
             return $link;
         } catch (Exception $e) {
             $this->set_error($e->getCode(), $e->getMessage());

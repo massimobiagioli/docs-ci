@@ -51,3 +51,26 @@ nav span.logged-user {
 .admin-item-buttons {
     text-align: center;
 }
+
+/* =================================
+ * Home
+ * ================================= */
+.home-item-wrapper {
+    border: 1px solid black;
+    background-color: #F8F9FA;
+    height: 100%;
+}
+.home-item-wrapper h3 {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.1em;
+    text-transform: uppercase;
+}
+.home-item-buttons {
+    text-align: center;
+}
+span.label-info {
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-left: 4px;
+}
