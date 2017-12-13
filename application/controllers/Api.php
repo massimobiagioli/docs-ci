@@ -4,6 +4,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Api extends CI_Controller {
     
+    public function test_upload() {
+        $this->output
+                    ->set_status_header(200)
+                    ->set_content_type('application/json')
+                    ->set_output(json_encode(json_encode($_FILES)));
+    }
+    
     public function create_index() {
         // Check auth
         $user = $this->auth->get_user();
