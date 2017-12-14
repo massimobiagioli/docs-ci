@@ -41,8 +41,11 @@ $csrf = [
                     </div>
                     
                     <!-- Metadata -->
-                    <div class="home-document-metadata form-group mt-2 clearfix">
-                        <h4><?php echo $this->lang->line('metadata'); ?></h4>
+                    <div class="home-document-metadata form-group mt-2">
+                        <div class="clearfix">
+                            <span class="metadata-title text-center"><?php echo $this->lang->line('metadata'); ?></span>
+                            <i id="add_row_metadata" class="fa fa-plus-circle fa-3x pull-right" aria-hidden="true"></i>
+                        </div>
                         <table class="table table-bordered table-hover" id="document_metadata">
                             <thead>
                                 <tr >                                   
@@ -51,7 +54,7 @@ $csrf = [
                                 </tr>
                             </thead>
 				<tbody>
-                                    <tr id='metadata_row_0'>                                       
+                                    <tr id="metadata_row_0">                                       
                                         <td>
                                             <input type="text" name="key0"                                                     
                                                    class="form-control"/>
@@ -60,12 +63,17 @@ $csrf = [
                                             <input type="text" name="value0"                                                     
                                                    class="form-control"/>
                                         </td>
+                                        <td>
+                                            <div class="metadata-icons"> 
+                                                <i class="delete_row_metadata fa fa-trash fa-2x" 
+                                                   data-rowid="0"
+                                                   aria-hidden="true"></i>
+                                            </div> <!-- .metadata-icons -->
+                                        </td>
                                     </tr>
-                                    <tr id='metadata_row_1'></tr>
+                                    <tr id="metadata_row_1"></tr>
 				</tbody>
 			</table>
-                        <span id="add_row_metadata" class="btn btn-success pull-left">Add Row</span>
-                        <span id='delete_row_metadata' class="pull-right btn btn-danger">Delete Row</span>
                     </div>
                     
                     <!-- Buttons -->                                

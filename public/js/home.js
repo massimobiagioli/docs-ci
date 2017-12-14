@@ -12,18 +12,22 @@ $(function () {
         var rowContent = '<td><input name="key' + rowIndex + 
                 '" type="text" class="form-control input-md" />' +
                 '<td><input name="value' + rowIndex + 
-                '" type="text" class="form-control input-md" />';
+                '" type="text" class="form-control input-md" />' +
+                '<td><div class="metadata-icons">' +
+                '<i class="delete_row_metadata fa fa-trash fa-2x" data-rowid="' + (rowIndex) + '" ' + 
+                'aria-hidden="true"></i></div></td>'; 
         $('#metadata_row_' + rowIndex).html(rowContent);
-        $('#document_metadata').append('<tr id="document_metadata_' + (rowIndex + 1) + '"></tr>');
+        $('#document_metadata').append('<tr id="metadata_row_' + (rowIndex + 1) + '"></tr>');
         rowIndex++;
     });
     
     // Delete row from metadata
-    $("#delete_row_metadata").click(function () {
-        if (rowIndex > 1) {
-            $("#metadata_row_" + (rowIndex - 1)).html('');
-            rowIndex--;
-        }
+    $("body").on('click', '.delete_row_metadata', function() {
+        alert($(this).data('rowid'));
+//        if (rowIndex > 1) {
+//            $("#metadata_row_" + (rowIndex - 1)).html('');
+//            rowIndex--;
+//        }
     });
 
 });
