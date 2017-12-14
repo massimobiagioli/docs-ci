@@ -7,11 +7,12 @@ use Ramsey\Uuid\Uuid;
 class Api extends CI_Controller {
     
     public function test_upload() {
-        $display = print_r($_FILES, true);
+        $display = ['FILES' => print_r($_FILES, true),
+                    'POST' => print_r($_POST, true)];
         $this->output
                     ->set_status_header(200)
                     ->set_content_type('application/json')
-                    ->set_output($display);
+                    ->set_output(print_r($display, true));
     }
     
     public function create_index() {

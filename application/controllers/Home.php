@@ -22,11 +22,20 @@ class Home extends CI_Controller {
         ];
         $data['navbar'] = $this->view_manager->get_fragment('navbar', $navbar_data);
         
+        // Result
+        $data['home_result'] = $this->view_manager->get_fragment('home_result');
+        
+        // Error Messages
+        $data['home_error_messages'] = $this->view_manager->get_fragment('home_error_messages');
+        
         // Home
         $this->load->view('home', $data);
         
         // Footer
-        $this->view_manager->load_footer();
+        $footer_data = [
+            'custom_scripts' => ['home.js']
+        ];
+        $this->view_manager->load_footer($footer_data);
     }
     
     public function logout() {

@@ -26,3 +26,6 @@ $lang['upload_file'] = 'Carica file';
 $lang['select'] = 'Scegli ...';
 $lang['load'] = 'Carica';
 $lang['document_uploaded'] = 'Documento caricato';
+$lang['key'] = 'Chiave';
+$lang['value'] = 'Valore';
+$lang['metadata'] = 'Metadati';

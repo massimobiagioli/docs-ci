@@ -22,7 +22,7 @@ $csrf = [
                       class="form-horizontal" 
                       method="post" 
                       enctype="multipart/form-data"
-                      action="<?= site_url('api/upload_document') ?>"
+                      action="<?= site_url('api/test_upload') ?>"
                       data-update="home_result home_error_messages">  
 
                     <!-- Hidden -->
@@ -32,14 +32,42 @@ $csrf = [
 
                     <!-- Upload -->
                     <div class="form-group mt-2 text-left">
-                        <label class="btn btn-success btn-lg" for="file_to_upload">
+                        <label class="btn btn-success" for="file_to_upload">
                             <input id="file_to_upload" name="file_to_upload" type="file" style="display:none" 
                                    onchange="$('#upload-file-info').html(this.files[0].name)">
                             <?php echo $this->lang->line('select'); ?>
                         </label>
                         <span class="label label-info" id="upload-file-info"></span>
                     </div>
-
+                    
+                    <!-- Metadata -->
+                    <div class="home-document-metadata form-group mt-2 clearfix">
+                        <h4><?php echo $this->lang->line('metadata'); ?></h4>
+                        <table class="table table-bordered table-hover" id="document_metadata">
+                            <thead>
+                                <tr >                                   
+                                    <th class="text-center"><?php echo $this->lang->line('key'); ?></th>
+                                    <th class="text-center"><?php echo $this->lang->line('value'); ?></th>                                            
+                                </tr>
+                            </thead>
+				<tbody>
+                                    <tr id='metadata_row_0'>                                       
+                                        <td>
+                                            <input type="text" name="key0"                                                     
+                                                   class="form-control"/>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="value0"                                                     
+                                                   class="form-control"/>
+                                        </td>
+                                    </tr>
+                                    <tr id='metadata_row_1'></tr>
+				</tbody>
+			</table>
+                        <span id="add_row_metadata" class="btn btn-success pull-left">Add Row</span>
+                        <span id='delete_row_metadata' class="pull-right btn btn-danger">Delete Row</span>
+                    </div>
+                    
                     <!-- Buttons -->                                
                     <div class="home-item-buttons form-group">
                         <input type="submit" value="<?php echo $this->lang->line('load'); ?>" class="btn btn-primary">
@@ -53,11 +81,11 @@ $csrf = [
     <!-- MESSAGES -->
     <div class="row mt-4">
         <div id="home_error_messages" class="col-12">
-
+            <?php echo $home_error_messages; ?>
         </div>
 
         <div id="home_result" class="col-12">
-
+            <?php echo $home_result; ?>
         </div>
     </div>
 
