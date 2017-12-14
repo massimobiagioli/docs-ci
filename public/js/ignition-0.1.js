@@ -11,27 +11,24 @@ var Ignition = (function() {
      */
     var sendRequest = function(sender) {
         var $sender = $(sender);
-        var params = '';
         var action = $sender.data('action') || $sender.attr('action');
+        var formData;
         
         if ($sender.is('form')) {
-            params = $sender.serialize();
+            formData = new FormData($sender[0]);
+        } else {
+            formData = new FormData();
         }
         if ($sender.data('update')) {
-            if (params.length > 0) {
-                params += '&';
-            }
-            params += 'update=' + $sender.data('update');
+            formData.append('update', $sender.data('update'));
         }
                 
-        $.each(sender.files, function(i, file) {
-            params += file.name;            
-        });
-        
         $.ajax({
             url: action,
             type: 'post',
-            data: params,           
+            data: formData,        
+            processData: false,
+            contentType: false,
             success: function(data) {
                 var xml = $(data);
 
