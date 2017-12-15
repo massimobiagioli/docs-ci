@@ -21,6 +21,15 @@ interface Dms {
     public function delete_index($index_name);
     
     /**
+     * Index a document
+     * @param string $index Index
+     * @param string $type Document Type     
+     * @param array $metadata Metadata
+     * @param string $id Document Id (if null, automatically use a uuid)
+     */
+    public function index_document($index, $type, $metadata, $id = null);
+    
+    /**
      * @return Last error code
      */
     public function last_error_code();

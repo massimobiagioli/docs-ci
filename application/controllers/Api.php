@@ -101,17 +101,28 @@ class Api extends CI_Controller {
         }
 
         // Invoke storage
-        $storage = get_storage();
-        $uuid4 = Uuid::uuid4();
-        $filename = $uuid4->toString();
-        $result = $storage->upload($file_to_upload['tmp_name'], $filename);
-        if (!$result) {
-            $this->handle_internal_error($this->lang->line('error_upload_document'), $storage->last_error_code(), $storage->last_error_description());
-            return;
+//        $storage = get_storage();
+//        $uuid4 = Uuid::uuid4();
+//        $filename = $uuid4->toString();
+//        $result = $storage->upload($file_to_upload['tmp_name'], $filename);
+//        if (!$result) {
+//            $this->handle_internal_error($this->lang->line('error_upload_document'), $storage->last_error_code(), $storage->last_error_description());
+//            return;
+//        }
+        
+        // Set metadata
+        $post_data = $this->input->post();
+        $metadata = [];
+        foreach ($post_data as $key => $value) {
+            if (strtolower(substr($key, 0, 3)) === 'key') {
+                $vk = 'value' . substr($key, 3);
+                $metadata[$value] = $post_data[$vk];
+            }
         }
-
+        
         // Invoke DMS
         $dms = get_dms();
+        $result = $dms->index_document($user['user_login'], $metadata);
         
         // Handle result
         $this->handle_result($this->lang->line('document_uploaded'), $result);

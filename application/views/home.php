@@ -22,7 +22,7 @@ $csrf = [
                       class="form-horizontal" 
                       method="post" 
                       enctype="multipart/form-data"
-                      action="<?= site_url('api/test_upload') ?>"
+                      action="<?= site_url('api/upload_document') ?>"
                       data-update="home_result home_error_messages">  
 
                     <!-- Hidden -->

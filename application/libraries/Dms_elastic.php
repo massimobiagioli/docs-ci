@@ -55,5 +55,23 @@ class Dms_elastic extends Dms_super implements Dms {
         }
     }
 
+    public function index_document($index, $type, $metadata, $id = null) {
+        try {
+            $params = [];
+            $params['index'] = $index;
+            $params['type'] = $type;
+            if ($id === null) {
+                // TODO: Use UUID
+            } else {
+                $params['id'] = $index;
+            }            
+            $params['body'] = $metadata;
+            $response = $this->client->index($params);
+            return $response;
+        } catch (Exception $e) {
+            $this->set_error($e->getCode(), $e->getMessage());
+        }
+    }
+
 }
 
