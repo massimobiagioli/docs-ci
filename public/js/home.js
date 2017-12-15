@@ -23,11 +23,8 @@ $(function () {
     
     // Delete row from metadata
     $("body").on('click', '.delete_row_metadata', function() {
-        alert($(this).data('rowid'));
-//        if (rowIndex > 1) {
-//            $("#metadata_row_" + (rowIndex - 1)).html('');
-//            rowIndex--;
-//        }
+        var index = $(this).data('rowid');        
+        $("#metadata_row_" + index).html('');        
     });
 
 });

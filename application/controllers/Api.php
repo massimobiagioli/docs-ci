@@ -20,7 +20,8 @@ class Api extends CI_Controller {
             'FILES' => print_r($_FILES, true),
             'POST' => print_r($metadata, true)
         ];
-
+        
+       
         $this->output
                 ->set_status_header(200)
                 ->set_content_type('application/json')
@@ -110,7 +111,8 @@ class Api extends CI_Controller {
         }
 
         // Invoke DMS
-        // TODO ...
+        $dms = get_dms();
+        
         // Handle result
         $this->handle_result($this->lang->line('document_uploaded'), $result);
     }

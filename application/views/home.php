@@ -44,7 +44,7 @@ $csrf = [
                     <div class="home-document-metadata form-group mt-2">
                         <div class="clearfix">
                             <span class="metadata-title text-center"><?php echo $this->lang->line('metadata'); ?></span>
-                            <i id="add_row_metadata" class="fa fa-plus-circle fa-3x pull-right" aria-hidden="true"></i>
+                            <i id="add_row_metadata" class="fa fa-plus-circle fa-2x pull-left" aria-hidden="true"></i>
                         </div>
                         <table class="table table-bordered table-hover" id="document_metadata">
                             <thead>
