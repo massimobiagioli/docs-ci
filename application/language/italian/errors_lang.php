@@ -12,3 +12,4 @@ $lang['error_delete_index'] = 'Errore cancellazione indice';
 
 // Home
 $lang['error_upload_document'] = 'Errore caricamento documento';
+$lang['error_index_document'] = 'Errore indicizzazione documento';

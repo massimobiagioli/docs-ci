@@ -22,12 +22,11 @@ interface Dms {
     
     /**
      * Index a document
-     * @param string $index Index
-     * @param string $type Document Type     
+     * @param string $index Index   
      * @param array $metadata Metadata
      * @param string $id Document Id (if null, automatically use a uuid)
      */
-    public function index_document($index, $type, $metadata, $id = null);
+    public function index_document($index, $metadata, $id = null);
     
     /**
      * @return Last error code

@@ -25,7 +25,7 @@
                         <form class="form-admin" id="form-admin-create-index" 
                             class="form-horizontal" 
                             method="post" 
-                            action="<?= site_url('api/create_index') ?>"
+                            action="<?= site_url('admin/create_index') ?>"
                             data-update="admin_result admin_error_messages">
 
                             <!-- Hidden -->
@@ -63,7 +63,7 @@
                         <form class="form-admin" id="form-admin-create-index" 
                             class="form-horizontal" 
                             method="post" 
-                            action="<?= site_url('api/delete_index') ?>"
+                            action="<?= site_url('admin/delete_index') ?>"
                             data-update="admin_result admin_error_messages">
 
                             <!-- Hidden -->

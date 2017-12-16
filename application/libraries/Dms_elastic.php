@@ -4,6 +4,7 @@ require_once __DIR__ . '/Dms.php';
 require_once __DIR__ . '/Dms_super.php';
 
 use Elasticsearch\ClientBuilder;
+use Ramsey\Uuid\Uuid;
 
 /**
  * Document Manager System - ElasticSearch Implementation
@@ -36,7 +37,18 @@ class Dms_elastic extends Dms_super implements Dms {
     public function create_index($index_name) {
         try {
             $response = $this->client->indices()->create([
-                'index' => $index_name
+                'index' => $index_name,
+                'body' => [
+                    'mappings' => [
+                        'default' => [
+                            '_source' => [
+                                'excludes' => [
+                                    'data'
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
             ]);
             return $response;
         } catch (Exception $e) {
@@ -55,17 +67,22 @@ class Dms_elastic extends Dms_super implements Dms {
         }
     }
 
-    public function index_document($index, $type, $metadata, $id = null) {
+    public function index_document($index, $metadata, $id = null) {
         try {
             $params = [];
             $params['index'] = $index;
-            $params['type'] = $type;
+            $params['type'] = 'default';
             if ($id === null) {
-                // TODO: Use UUID
+                $uuid4 = Uuid::uuid4();
+                $params['id'] = $uuid4->getHex();
             } else {
                 $params['id'] = $index;
             }            
             $params['body'] = $metadata;
+            
+            // Ingest pipeline
+            $params['pipeline'] = 'attachment';
+            
             $response = $this->client->index($params);
             return $response;
         } catch (Exception $e) {

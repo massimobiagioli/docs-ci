@@ -4,15 +4,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Admin extends CI_Controller {
     
-    public function test() {
-        $storage = get_storage();
-        $link = $storage->upload('data://text/plain;base64,SSBsb3ZlIFBIUAo=');
-        $this->output
-                    ->set_status_header(200)
-                    ->set_content_type('application/json')
-                    ->set_output($link);
-    }
-    
     public function index() {
         $logged_user = $this->session->userdata('logged_user');
         if (!$logged_user || $logged_user['user_admin'] == 0) {
@@ -71,4 +62,78 @@ class Admin extends CI_Controller {
         $this->ignition_client->xmlResponse();
     }
     
+    public function create_index() {
+        // Check auth
+        $user = $this->auth->get_user();
+        if (!$user || !$this->auth->is_user_admin($user)) {
+            $this->handle_missing_auth_error();
+            return;
+        }
+
+        // Check params
+        $index_name = $this->input->post('index_name');
+        if (!$index_name) {
+            $this->handle_bad_parameters(
+                    $this->lang->line('error_missing_parameter') . ': index_name');
+            return;
+        }
+
+        // Invoke dms
+        $dms = get_dms();
+        $result = $dms->create_index($index_name);
+        if (!$result) {
+            $this->handle_internal_error($this->lang->line('error_create_index'), $dms->last_error_code(), $dms->last_error_description());
+            return;
+        }
+
+        // Handle result
+        $this->handle_result($this->lang->line('index_created'), $result);
+    }
+
+    public function delete_index() {
+        // Check auth
+        $user = $this->auth->get_user();
+        if (!$user || !$this->auth->is_user_admin($user)) {
+            $this->handle_missing_auth_error();
+            return;
+        }
+
+        // Check params
+        $index_name = $this->input->post('index_name');
+        if (!$index_name) {
+            $this->handle_bad_parameters(
+                    $this->lang->line('error_missing_parameter') . ': index_name');
+            return;
+        }
+
+        // Invoke dms
+        $dms = get_dms();
+        $result = $dms->delete_index($index_name);
+        if (!$result) {
+            $this->handle_internal_error($this->lang->line('error_delete_index'), $dms->last_error_code(), $dms->last_error_description());
+            return;
+        }
+
+        // Handle result
+        $this->handle_result($this->lang->line('index_deleted'), $result);
+    }
+    
+    private function handle_missing_auth_error() {
+        redirect('/');
+    }
+
+    private function handle_bad_parameters($error_text) {
+        $this->ignition_client->set_fragment_data('admin_error_messages', ['error_messages' => [$error_text]]);
+        $this->ignition_client->xmlResponse();
+    }
+
+    private function handle_internal_error($error_message, $error_code, $error_description) {
+        $this->ignition_client->set_fragment_data('admin_error_messages', ['error_messages' => [$error_message]]);
+        $this->ignition_client->xmlResponse();
+    }
+
+    private function handle_result($message, $result) {
+        $this->ignition_client->set_fragment_data('admin_result', ['result' => $message]);
+        $this->ignition_client->xmlResponse();
+    }
 }

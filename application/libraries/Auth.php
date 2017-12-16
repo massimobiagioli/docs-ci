@@ -46,15 +46,6 @@ class Auth {
         return $user['user_admin'] == 1;
     }
     
-    /**
-     * Check if the request is made by CodeIgniter
-     * @return TRUE/FALSE
-     */
-    public function is_ci_request() {
-        $headers = $this->CI->input->request_headers();
-        return (isset($headers['X-Api-Key']));
-    }
-    
     private function load_user($username, $password) {
         $this->CI->load->model('user_model');
         $result = $this->CI->user_model->get([
