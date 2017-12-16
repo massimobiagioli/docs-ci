@@ -91,3 +91,16 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 |
 */
 defined('USER_PASSWORD_SALT') OR define('USER_PASSWORD_SALT', 'b=whg&*M~JGrl|T(=+QIE`GUGzkS`|W%[GoFE/`14]S{n{Fa4p={vT+|gOixF.BW');
+
+/*
+|--------------------------------------------------------------------------
+| CUSTOM ERROR CODES
+|--------------------------------------------------------------------------
+|
+*/
+defined('ERROR_NONE') OR define('ERROR_NONE', 0);
+defined('ERROR_AUTH') OR define('ERROR_AUTH', 1000);
+defined('ERROR_PRECONDITION') OR define('ERROR_PRECONDITION', 2000);
+defined('ERROR_STORAGE') OR define('ERROR_STORAGE', 3000);
+defined('ERROR_DMS') OR define('ERROR_DMS', 4000);
+defined('ERROR_UNHANDLED') OR define('ERROR_UNHANDLED', 9000);

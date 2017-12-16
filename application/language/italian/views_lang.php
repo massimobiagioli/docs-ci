@@ -29,4 +29,4 @@ $lang['document_uploaded'] = 'Documento caricato';
 $lang['key'] = 'Chiave';
 $lang['value'] = 'Valore';
 $lang['metadata'] = 'Metadati';
-$lang['document_uploaded_and_indexed_successfully'] = 'Documento archiviato ed indicizzato correttamente';
+$lang['document_indexed_successfully'] = 'Documento indicizzato correttamente';

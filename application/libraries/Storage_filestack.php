@@ -1,4 +1,5 @@
 <?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 require_once __DIR__ . '/Storage.php';
 require_once __DIR__ . '/Storage_super.php';

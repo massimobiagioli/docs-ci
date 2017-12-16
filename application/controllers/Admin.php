@@ -63,71 +63,36 @@ class Admin extends CI_Controller {
     }
     
     public function create_index() {
-        // Check auth
-        $user = $this->auth->get_user();
-        if (!$user || !$this->auth->is_user_admin($user)) {
-            $this->handle_missing_auth_error();
-            return;
+        $this->doc_service->create_index($this->input->post('index_name'));
+        if ($this->doc_service->get_status() == ERROR_NONE) {
+            $this->handle_result($this->doc_service->get_message(), $this->doc_service->get_result());
+        } else {
+            if ($this->doc_service->get_status() === ERROR_AUTH) {
+                $this->handle_unauthorized();
+            } else {
+                $this->handle_error($this->doc_service->get_message(), $this->doc_service->get_native_status());
+            }
         }
-
-        // Check params
-        $index_name = $this->input->post('index_name');
-        if (!$index_name) {
-            $this->handle_bad_parameters(
-                    $this->lang->line('error_missing_parameter') . ': index_name');
-            return;
-        }
-
-        // Invoke dms
-        $dms = get_dms();
-        $result = $dms->create_index($index_name);
-        if (!$result) {
-            $this->handle_internal_error($this->lang->line('error_create_index'), $dms->last_error_code(), $dms->last_error_description());
-            return;
-        }
-
-        // Handle result
-        $this->handle_result($this->lang->line('index_created'), $result);
     }
 
     public function delete_index() {
-        // Check auth
-        $user = $this->auth->get_user();
-        if (!$user || !$this->auth->is_user_admin($user)) {
-            $this->handle_missing_auth_error();
-            return;
+        $this->doc_service->delete_index($this->input->post('index_name'));
+        if ($this->doc_service->get_status() == ERROR_NONE) {
+            $this->handle_result($this->doc_service->get_message(), $this->doc_service->get_result());
+        } else {
+            if ($this->doc_service->get_status() === ERROR_AUTH) {
+                $this->handle_unauthorized();
+            } else {
+                $this->handle_error($this->doc_service->get_message(), $this->doc_service->get_native_status());
+            }
         }
-
-        // Check params
-        $index_name = $this->input->post('index_name');
-        if (!$index_name) {
-            $this->handle_bad_parameters(
-                    $this->lang->line('error_missing_parameter') . ': index_name');
-            return;
-        }
-
-        // Invoke dms
-        $dms = get_dms();
-        $result = $dms->delete_index($index_name);
-        if (!$result) {
-            $this->handle_internal_error($this->lang->line('error_delete_index'), $dms->last_error_code(), $dms->last_error_description());
-            return;
-        }
-
-        // Handle result
-        $this->handle_result($this->lang->line('index_deleted'), $result);
     }
     
-    private function handle_missing_auth_error() {
+    private function handle_unauthorized() {
         redirect('/');
     }
 
-    private function handle_bad_parameters($error_text) {
-        $this->ignition_client->set_fragment_data('admin_error_messages', ['error_messages' => [$error_text]]);
-        $this->ignition_client->xmlResponse();
-    }
-
-    private function handle_internal_error($error_message, $error_code, $error_description) {
+    private function handle_error($error_message, $native_status) {
         $this->ignition_client->set_fragment_data('admin_error_messages', ['error_messages' => [$error_message]]);
         $this->ignition_client->xmlResponse();
     }
