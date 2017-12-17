@@ -8,7 +8,7 @@
     ];
 ?>
 
-<div class="content-wrapper container">
+<div class="content-wrapper container-fluid">
     <div class="row">
         
         <!-- CREATE INDEX -->
@@ -122,7 +122,7 @@
     </div> <!-- .row -->
     
     <!-- MESSAGES -->
-    <div class="row mt-4">
+    <div class="row mt-4 mr-2 ml-2">
         <div id="admin_error_messages" class="col-12">
             <?php echo $admin_error_messages; ?>
         </div>

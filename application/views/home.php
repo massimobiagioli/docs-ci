@@ -8,7 +8,7 @@ $csrf = [
 ];
 ?>
 
-<div class="content-wrapper container">
+<div class="content-wrapper container-fluid">
     <div class="row">
 
         <!-- UPLOAD -->
@@ -87,7 +87,7 @@ $csrf = [
     </div> <!-- .row -->
 
     <!-- MESSAGES -->
-    <div class="row mt-4">
+    <div class="row mt-4 mr-2 ml-2">
         <div id="home_error_messages" class="col-12">
             <?php echo $home_error_messages; ?>
         </div>
