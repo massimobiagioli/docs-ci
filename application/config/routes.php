@@ -52,3 +52,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'login';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+/*
+| -------------------------------------------------------------------------
+| API
+| -------------------------------------------------------------------------
+ */
+$route['api/create_index']['post'] = 'api/rest_router/create_index';
+$route['api/delete_index']['delete'] = 'api/rest_router/delete_index';
+$route['api/index_document']['post'] = 'api/rest_router/index_document';
