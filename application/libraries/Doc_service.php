@@ -54,6 +54,11 @@ class Doc_service {
 
             // Handle result
             $this->set_status(ERROR_NONE, $this->CI->lang->line('index_created') . ':' . $index_name, $result);
+            
+            // Log
+            log_message('info', $this->CI->lang->line('index_created') . ':' . $index_name);
+            log_message('info', json_encode($result));
+            
         } catch (Exception $e) {
             $this->set_status(ERROR_UNHANDLED, $e->getCode() . ' - ' . $e->getMessage());
         }
