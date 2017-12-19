@@ -20,3 +20,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <link rel="stylesheet" href="<?php echo base_url() . "public/css/style.css"; ?>">
     </head>
     <body>
+        <div class="loading">
+            <img class="loading-image" src="<?php echo base_url() . "public/img/spinner.gif"; ?>" alt="loading" />
+        </div>
+        
