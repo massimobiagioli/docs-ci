@@ -22,8 +22,8 @@ $lang['execute'] = 'Esegui';
 $lang['migrations_executed'] = 'Migrations eseguite';
 
 // Home
-$lang['upload_file'] = 'Carica file';
-$lang['select'] = 'Scegli ...';
+$lang['upload_document'] = 'Carica documento';
+$lang['browse'] = 'Sfoglia ...';
 $lang['load'] = 'Carica';
 $lang['document_uploaded'] = 'Documento caricato';
 $lang['key'] = 'Chiave';

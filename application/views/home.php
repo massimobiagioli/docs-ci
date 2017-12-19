@@ -15,7 +15,7 @@ $csrf = [
         <div class="col-12 mt-4">        
             <div class="card text-center home-item-wrapper p-2">
                 <div class="card-header">
-                    <h3><?php echo $this->lang->line('upload_file'); ?></h3>
+                    <h3><?php echo $this->lang->line('upload_document'); ?></h3>
                 </div>
 
                 <form class="form-home" id="form-home-upload_file" 
@@ -31,13 +31,14 @@ $csrf = [
                     </div>
 
                     <!-- Upload -->
-                    <div class="form-group mt-2 text-left">
+                    <div class="form-group mt-2 mb-0 text-left">
                         <label class="btn btn-success" for="file_to_upload">
                             <input id="file_to_upload" name="file_to_upload" type="file" style="display:none" 
                                    onchange="$('#upload-file-info').html(this.files[0].name)">
-                            <?php echo $this->lang->line('select'); ?>
+                            <?php echo $this->lang->line('browse'); ?>
                         </label>
                         <span class="label label-info" id="upload-file-info"></span>
+                        <hr class="mt-0 mb-1">
                     </div>
                     
                     <!-- Metadata -->
@@ -77,7 +78,7 @@ $csrf = [
                     </div>
                     
                     <!-- Buttons -->                                
-                    <div class="home-item-buttons form-group">
+                    <div class="home-item-buttons form-group mb-1">
                         <input type="submit" value="<?php echo $this->lang->line('load'); ?>" class="btn btn-primary">
                     </div>   
                 </form>
