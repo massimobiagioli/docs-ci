@@ -31,13 +31,17 @@ class Doc_service {
             // Check auth
             $user = $this->CI->auth->get_user();
             if (!$user || !$this->CI->auth->is_user_admin($user)) {
-                $this->set_status(ERROR_AUTH, $this->CI->lang->line('unauthorized'));
+                $msg = $this->CI->lang->line('unauthorized');
+                $this->set_status(ERROR_AUTH, $msg);
+                log_message('error', $msg);
                 return;
             }
 
             // Check params
             if (!$index_name) {
-                $this->set_status(ERROR_PRECONDITION, $this->CI->lang->line('error_missing_parameter_index_name'));
+                $msg = $this->CI->lang->line('error_missing_parameter_index_name');
+                $this->set_status(ERROR_PRECONDITION, $msg);
+                log_message('error', $msg);
                 return;
             }
 
@@ -45,22 +49,23 @@ class Doc_service {
             $dms = get_dms();
             $result = $dms->create_index($index_name);
             if (!$result) {
-                $this->set_status(ERROR_DMS, $this->CI->lang->line('error_create_index') . ':' . $index_name, null, [
+                $msg = $this->CI->lang->line('error_create_index') . ':' . $index_name;
+                $this->set_status(ERROR_DMS, $msg, null, [
                     'error_code' => $dms->last_error_code(),
                     'error_description' => $dms->last_error_description()
                 ]);
+                log_message('error', $msg . ' (' . $dms->last_error_code() . ' - ' . $dms->last_error_description() . ')');
                 return;
             }
 
             // Handle result
-            $this->set_status(ERROR_NONE, $this->CI->lang->line('index_created') . ':' . $index_name, $result);
-            
-            // Log
-            log_message('info', $this->CI->lang->line('index_created') . ':' . $index_name);
-            log_message('info', json_encode($result));
-            
+            $msg = $this->CI->lang->line('index_created') . ':' . $index_name;
+            $this->set_status(ERROR_NONE, $msg, $result);
+            log_message('info', $msg . ' (' . json_encode($result) . ')');
         } catch (Exception $e) {
-            $this->set_status(ERROR_UNHANDLED, $e->getCode() . ' - ' . $e->getMessage());
+            $msg = $e->getCode() . ' - ' . $e->getMessage();
+            $this->set_status(ERROR_UNHANDLED, $msg);
+            log_message('error', $msg);
         }
     }
 
@@ -75,13 +80,17 @@ class Doc_service {
             // Check auth
             $user = $this->CI->auth->get_user();
             if (!$user || !$this->CI->auth->is_user_admin($user)) {
-                $this->set_status(ERROR_AUTH, $this->CI->lang->line('unauthorized'));
+                $msg = $this->CI->lang->line('unauthorized');
+                $this->set_status(ERROR_AUTH, $msg);
+                log_message('error', $msg);
                 return;
             }
 
             // Check params
             if (!$index_name) {
-                $this->set_status(ERROR_PRECONDITION, $this->CI->lang->line('error_missing_parameter_index_name'));
+                $msg = $this->CI->lang->line('error_missing_parameter_index_name');
+                $this->set_status(ERROR_PRECONDITION, $msg);
+                log_message('error', $msg);
                 return;
             }
 
@@ -89,16 +98,23 @@ class Doc_service {
             $dms = get_dms();
             $result = $dms->delete_index($index_name);
             if (!$result) {
-                $this->set_status(ERROR_DMS, $this->CI->lang->line('error_delete_index') . ':' . $index_name, null, [
+                $msg = $this->CI->lang->line('error_delete_index') . ':' . $index_name;
+                $this->set_status(ERROR_DMS, $msg, null, [
                     'error_code' => $dms->last_error_code(),
                     'error_description' => $dms->last_error_description()
                 ]);
+                log_message('error', $msg . ' (' . $dms->last_error_code() . ' - ' . $dms->last_error_description() . ')');
+                return;
             }
 
             // Handle result
             $this->set_status(ERROR_NONE, $this->CI->lang->line('index_deleted') . ':' . $index_name, $result);
+            log_message('info', $msg . ' (' . json_encode($result) . ')');    
         } catch (Exception $e) {
             $this->set_status(ERROR_UNHANDLED, $e->getCode() . ' - ' . $e->getMessage());
+            $msg = $e->getCode() . ' - ' . $e->getMessage();
+            $this->set_status(ERROR_UNHANDLED, $msg);
+            log_message('error', $msg);
         }
     }
     
@@ -114,13 +130,17 @@ class Doc_service {
             // Check auth
             $user = $this->CI->auth->get_user();
             if (!$user || !$this->CI->auth->is_user_admin($user)) {
-                $this->set_status(ERROR_AUTH, $this->CI->lang->line('unauthorized'));
+                $msg = $this->CI->lang->line('unauthorized');
+                $this->set_status(ERROR_AUTH, $msg);
+                log_message('error', $msg);
                 return;
             }
 
             // Check params
             if (!$file_to_upload) {
-                $this->set_status(ERROR_PRECONDITION, $this->CI->lang->line('error_missing_parameter_filename'));
+                $msg = $this->CI->lang->line('error_missing_parameter_filename');
+                $this->set_status(ERROR_PRECONDITION, $msg);
+                log_message('error', $msg);
                 return;
             }
 
@@ -130,10 +150,12 @@ class Doc_service {
             $filename = $uuid4->getHex();
             $result = $storage->upload($file_to_upload['tmp_name'], $filename);
             if (!$result) {
-                $this->set_status(ERROR_STORAGE, $this->CI->lang->line('error_upload_document'), null, [
+                $msg = $this->CI->lang->line('error_upload_document');
+                $this->set_status(ERROR_STORAGE, $msg, null, [
                     'error_code' => $storage->last_error_code(),
                     'error_description' => $storage->last_error_description()
                 ]);
+                log_message('error', $msg . ' (' . $storage->last_error_code() . ' - ' . $storage->last_error_description() . ')');
                 return;
             }
 
@@ -160,17 +182,24 @@ class Doc_service {
             $dms = get_dms();
             $result = $dms->index_document($user['user_login'], $metadata);
             if (!$result) {
+                $msg = $this->CI->lang->line('error_index_document');
                 $this->set_status(ERROR_DMS, $this->CI->lang->line('error_index'), null, [
                     'error_code' => $storage->last_error_code(),
                     'error_description' => $storage->last_error_description()
                 ]);
+                log_message('error', $msg . ' (' . $dms->last_error_code() . ' - ' . $dms->last_error_description() . ')');
                 return;
             }
 
             // Handle result
-            $this->set_status(ERROR_NONE, $this->CI->lang->line('document_indexed_successfully'), $result);
+            $msg = $this->CI->lang->line('document_indexed_successfully');
+            $this->set_status(ERROR_NONE, $msg, $result);
+            log_message('info', $msg . ' (' . json_encode($result) . ')');    
         } catch (Exception $e) {
             $this->set_status(ERROR_UNHANDLED, $e->getCode() . ' - ' . $e->getMessage());
+            $msg = $e->getCode() . ' - ' . $e->getMessage();
+            $this->set_status(ERROR_UNHANDLED, $msg);
+            log_message('error', $msg);
         }
     }
 
