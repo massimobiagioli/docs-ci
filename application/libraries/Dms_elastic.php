@@ -1,4 +1,5 @@
 <?php
+
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 require_once __DIR__ . '/Dms.php';
@@ -13,13 +14,15 @@ use Ramsey\Uuid\Uuid;
  */
 class Dms_elastic extends Dms_super implements Dms {
     
+    const DOCUMENT_TYPE = 'default';
+    
     private $client;
     
     public function __construct() {
         parent::__construct();
         $this->init_client();
     }
-    
+
     private function init_client() {
         $hosts = [
             [
@@ -31,13 +34,13 @@ class Dms_elastic extends Dms_super implements Dms {
             ]
         ];
         $this->client = ClientBuilder::create()
-                                        ->setHosts($hosts) 
-                                        ->build();     
+                ->setHosts($hosts)
+                ->build();
     }
 
     public function create_index($index_name) {
         try {
-            $response = $this->client->indices()->create([
+            return $this->client->indices()->create([
                 'index' => $index_name,
                 'body' => [
                     'mappings' => [
@@ -51,18 +54,16 @@ class Dms_elastic extends Dms_super implements Dms {
                     ]
                 ]
             ]);
-            return $response;
         } catch (Exception $e) {
             $this->set_error($e->getCode(), $e->getMessage());
         }
     }
-    
+
     public function delete_index($index_name) {
         try {
-            $response = $this->client->indices()->delete([
+            return $this->client->indices()->delete([
                 'index' => $index_name
             ]);
-            return $response;
         } catch (Exception $e) {
             $this->set_error($e->getCode(), $e->getMessage());
         }
@@ -72,24 +73,41 @@ class Dms_elastic extends Dms_super implements Dms {
         try {
             $params = [];
             $params['index'] = $index;
-            $params['type'] = 'default';
+            $params['type'] = self::DOCUMENT_TYPE;
             if ($id === null) {
                 $uuid4 = Uuid::uuid4();
                 $params['id'] = $uuid4->getHex();
             } else {
                 $params['id'] = $index;
-            }            
+            }
             $params['body'] = $metadata;
-            
+
             // Ingest pipeline
             $params['pipeline'] = 'attachment';
-            
-            $response = $this->client->index($params);
-            return $response;
+
+            return $this->client->index($params);
+        } catch (Exception $e) {
+            $this->set_error($e->getCode(), $e->getMessage());
+        }
+    }
+
+    public function search_documents($index, $params) {
+        try {
+            $criteria = [
+                'index' => $index,
+                'type' => self::DOCUMENT_TYPE,
+//                'body' => [
+//                    'query' => [
+//                        'match' => [
+//                            'testField' => 'abc'
+//                        ]
+//                    ]
+//                ]
+            ];
+            return $this->client->search($criteria);
         } catch (Exception $e) {
             $this->set_error($e->getCode(), $e->getMessage());
         }
     }
 
 }
-

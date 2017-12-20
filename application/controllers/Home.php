@@ -55,6 +55,19 @@ class Home extends CI_Controller {
         }
     }
     
+    public function search_documents() {
+        $this->doc_service->search_documents($this->input->post('free_search'));
+        if ($this->doc_service->get_status() == ERROR_NONE) {
+            $this->handle_search_documents($this->doc_service->get_result());
+        } else {
+            if ($this->doc_service->get_status() === ERROR_AUTH) {
+                $this->handle_unauthorized();
+            } else {
+                $this->handle_error($this->doc_service->get_message(), $this->doc_service->get_native_status());
+            }
+        }
+    }
+    
     private function handle_unauthorized() {
         redirect('/');
     }
@@ -66,6 +79,11 @@ class Home extends CI_Controller {
 
     private function handle_result($message, $result) {
         $this->ignition_client->set_fragment_data('home_result', ['result' => $message]);
+        $this->ignition_client->xmlResponse();
+    }
+    
+    private function handle_search_documents($result) {
+        $this->ignition_client->set_fragment_data('home_search_results', ['result' => $result]);
         $this->ignition_client->xmlResponse();
     }
 

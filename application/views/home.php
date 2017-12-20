@@ -12,7 +12,7 @@ $csrf = [
     <div class="row">
 
         <!-- UPLOAD -->
-        <div class="col-12 mt-4">        
+        <div class="col-12 col-md-6 mt-4">        
             <div class="card text-center home-item-wrapper p-2">
                 <div class="card-header">
                     <h3><?php echo $this->lang->line('upload_document'); ?></h3>
@@ -84,9 +84,46 @@ $csrf = [
                 </form>
             </div> <!-- .home-item-wrapper -->
         </div> <!-- .col -->
+        
+        <!-- SEARCH -->
+        <div class="col-12 col-md-6 mt-4">        
+            <div class="card text-center home-item-wrapper p-2">
+                <div class="card-header">
+                    <h3><?php echo $this->lang->line('search_documents'); ?></h3>
+                </div>
 
+                <form class="form-home" id="form-home-upload_file" 
+                      class="form-horizontal" 
+                      method="post"
+                      action="<?= site_url('home/search_documents') ?>"
+                      data-update="home_search_results home_error_messages">  
+
+                    <!-- Hidden -->
+                    <div>
+                        <input type="hidden" name="<?php echo $csrf['name']; ?>" value="<?php echo $csrf['hash']; ?>">
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" 
+                               name="free_search" 
+                               placeholder="<?php echo $this->lang->line('free_search_placeholder'); ?>"
+                               class="form-control">
+                    </div>
+                    
+                    <!-- Buttons -->                                
+                    <div class="home-item-buttons form-group mb-1">
+                        <input type="submit" value="<?php echo $this->lang->line('search'); ?>" class="btn btn-primary">
+                    </div>   
+                </form>
+            </div> <!-- .home-item-wrapper -->
+        </div> <!-- .col -->
     </div> <!-- .row -->
-
+    
+    <!-- RESULTS -->
+    <div class="row">
+        <div id="home_search_results" class="col-12 mt-4"></div>
+    </div> <!-- .row -->
+    
     <!-- MESSAGES -->
     <div class="row mt-4 mr-2 ml-2">
         <div id="home_error_messages" class="col-12">
