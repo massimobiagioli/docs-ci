@@ -2,7 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class MY_Log extends Log {
+class MY_Log extends CI_Log {
 
     public function write_log($level, $msg) {
         if ($this->_enabled === FALSE) {
