@@ -3,8 +3,12 @@
         <div><?php echo $this->lang->line('no_results'); ?></div>
     </div>
 <?php else: ?>
-    
-    
+
+    <div class="card">
+        <div class="card-header">
+            <h3>RISULTATI:</h3>
+        </div>
+
         <table id="search_results_datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
             <thead>
                 <tr>
@@ -17,6 +21,8 @@
                 </tr>
             </thead>
             <tbody>
+
+                <?php for($i = 0; $i < 30; $i++): ?>
                 <tr>
                     <td>Tiger Nixon</td>
                     <td>System Architect</td>
@@ -25,15 +31,11 @@
                     <td>2011/04/25</td>
                     <td>$320,800</td>
                 </tr>
-                <tr>
-                    <td>Garrett Winters</td>
-                    <td>Accountant</td>
-                    <td>Tokyo</td>
-                    <td>63</td>
-                    <td>2011/07/25</td>
-                    <td>$170,750</td>
-                </tr>
+                <?php endfor; ?>
+
             </tbody>
         </table>
     
+    </div>
+
 <?php endif; ?>

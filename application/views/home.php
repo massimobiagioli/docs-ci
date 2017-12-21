@@ -103,7 +103,7 @@ $csrf = [
                         <input type="hidden" name="<?php echo $csrf['name']; ?>" value="<?php echo $csrf['hash']; ?>">
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group mt-2">
                         <input type="text" 
                                name="free_search" 
                                placeholder="<?php echo $this->lang->line('free_search_placeholder'); ?>"

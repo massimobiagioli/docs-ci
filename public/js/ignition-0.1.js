@@ -7,7 +7,21 @@ var Ignition = (function() {
     
     var postUpdateFragmentActions = {
         renderDataTable: function(dataTableId) {
-            $('#' + dataTableId).DataTable({});
+            $('#' + dataTableId).DataTable({
+                "searching": false,
+                "lengthChange": false,
+                "info": false,
+                "pageLength": 5,
+                "pagingType": "full_numbers",
+                "language": {
+                    "paginate": {
+                        "first": "<i class=\"fa fa-fast-backward fa-fw\"></i>",
+                        "previous": "<i class=\"fa fa-step-backward fa-fw\"></i>",
+                        "next": "<i class=\"fa fa-step-forward fa-fw\"></i>",
+                        "last": "<i class=\"fa fa-fast-forward fa-fw\"></i>"
+                    }
+                }
+            });
         }
     };
     
