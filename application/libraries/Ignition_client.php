@@ -35,9 +35,15 @@ class Ignition_client {
      * Set fragment data
      * @param string $fragment_name Fragment name
      * @param string $fragments_data Fragment data
+     * @param string $post_update_action Action to execute after fragment render
+     * @param string $post_update_action_params Post fragment render action params
      */
-    public function set_fragment_data($fragment_name, $fragments_data) {
+    public function set_fragment_data($fragment_name, $fragments_data, $post_update_action = null, $post_update_action_params = null) {
         $this->fragments_data[$fragment_name] = $fragments_data;
+        if ($post_update_action) {
+            $this->fragments_data[$fragment_name]['post_update_action'] = $post_update_action;
+            $this->fragments_data[$fragment_name]['post_update_action_params'] = $post_update_action_params;
+        }
     }
 
     /**
@@ -94,6 +100,12 @@ class Ignition_client {
         foreach ($fragments as $fragment) {
             $xml->fragments->$fragment = null;
             $this->addCData($xml->fragments->$fragment, $this->CI->load->view('fragments/' . $fragment, isset($this->fragments_data[$fragment]) ? $this->fragments_data[$fragment] : null, true));
+            if (isset($this->fragments_data[$fragment]['post_update_action'])) {
+                $xml->fragments->$fragment['post_update_action'] = $this->fragments_data[$fragment]['post_update_action'];
+            }
+            if (isset($this->fragments_data[$fragment]['post_update_action_params'])) {
+                $xml->fragments->$fragment['post_update_action_params'] = $this->fragments_data[$fragment]['post_update_action_params'];
+            }
         }
     }
 

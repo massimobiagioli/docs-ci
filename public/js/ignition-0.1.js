@@ -5,6 +5,12 @@
  */
 var Ignition = (function() {
     
+    var postUpdateFragmentActions = {
+        renderDataTable: function(dataTableId) {
+            $('#' + dataTableId).DataTable({});
+        }
+    };
+    
     /**
      * Send request to CI
      * @param object sender
@@ -50,7 +56,14 @@ var Ignition = (function() {
             var $node = $(node);
             var nodeName = $node.prop('tagName');
             var nodeContent = $node.text();
+            var postUpdateAction = $node.attr('post_update_action');
+            var postUpdateActionParams = $node.attr('post_update_action_params');
             $('#' + nodeName).html(nodeContent);
+            
+            // Execute post update action
+            if (postUpdateAction) {
+                postUpdateFragmentActions[postUpdateAction](postUpdateActionParams);
+            }
         });
     }
     

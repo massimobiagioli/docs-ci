@@ -26,5 +26,4 @@ $(function () {
         var index = $(this).data('rowid');        
         $("#metadata_row_" + index).html('');        
     });
-
 });

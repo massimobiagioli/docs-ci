@@ -31,5 +31,7 @@ $lang['value'] = 'Valore';
 $lang['metadata'] = 'Metadati';
 $lang['document_indexed_successfully'] = 'Documento indicizzato correttamente';
 $lang['search_documents'] = 'Ricerca documenti';
+$lang['search_results'] = 'Risultati della ricerca';
 $lang['search'] = 'Ricerca';
 $lang['free_search_placeholder'] = 'ricerca libera dei documenti ...';
+$lang['no_results'] = 'Nessun risultato!';

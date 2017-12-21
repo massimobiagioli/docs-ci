@@ -83,7 +83,7 @@ class Home extends CI_Controller {
     }
     
     private function handle_search_documents($result) {
-        $this->ignition_client->set_fragment_data('home_search_results', ['result' => $result]);
+        $this->ignition_client->set_fragment_data('home_search_results', ['result' => $result], 'renderDataTable', 'search_results_datatable');
         $this->ignition_client->xmlResponse();
     }
 
