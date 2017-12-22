@@ -1,41 +1,20 @@
-<?php if (empty($result)): ?>
-    <div class="row error-messages p-2 mt-2">
-        <div><?php echo $this->lang->line('no_results'); ?></div>
+<div class="card result-list-wrapper">
+    <div class="card-header">
+        <h3><?php echo $this->lang->line('results'); ?></h3>
     </div>
-<?php else: ?>
-
-    <div class="card">
-        <div class="card-header">
-            <h3>RISULTATI:</h3>
-        </div>
-
-        <table id="search_results_datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Position</th>
-                    <th>Office</th>
-                    <th>Age</th>
-                    <th>Start date</th>
-                    <th>Salary</th>
-                </tr>
-            </thead>
-            <tbody>
-
-                <?php for($i = 0; $i < 30; $i++): ?>
-                <tr>
-                    <td>Tiger Nixon</td>
-                    <td>System Architect</td>
-                    <td>Edinburgh</td>
-                    <td>61</td>
-                    <td>2011/04/25</td>
-                    <td>$320,800</td>
-                </tr>
-                <?php endfor; ?>
-
-            </tbody>
-        </table>
-    
+    <div class="col-12">
+        <table id="search_results_datatable" 
+           class="table table-striped table-bordered"
+           data-url="<?php echo $url; ?>"
+           data-pagelength="<?php echo $page_length; ?>"
+           cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th><?php echo $this->lang->line('dt_col_filename'); ?></th>
+                <th><?php echo $this->lang->line('dt_col_created'); ?></th>
+                <th></th>
+            </tr>
+        </thead>
+    </table>
     </div>
-
-<?php endif; ?>
+</div>

@@ -91,7 +91,36 @@ class Dms_elastic extends Dms_super implements Dms {
         }
     }
 
-    public function search_documents($index, $params) {
+    public function search_documents($index, $search_info) {
+        try {
+            $criteria = [
+                'index' => $index,
+                'type' => self::DOCUMENT_TYPE,
+                "_source" => ["document_*", "attachment.content_type"]
+//                'body' => [
+//                    'query' => [
+//                        'match' => [
+//                            'testField' => 'abc'
+//                        ]
+//                    ]
+//                ]
+            ];
+            
+            // Pagination
+            if (isset($search_info['start'])) {
+                $criteria['from'] = $search_info['start'];
+            }
+            if (isset($search_info['length'])) {
+                $criteria['size'] = $search_info['length'];
+            }
+            
+            return $this->client->search($criteria);
+        } catch (Exception $e) {
+            $this->set_error($e->getCode(), $e->getMessage());
+        }
+    }
+
+    public function count_documents($index, $search_info) {
         try {
             $criteria = [
                 'index' => $index,
@@ -104,7 +133,7 @@ class Dms_elastic extends Dms_super implements Dms {
 //                    ]
 //                ]
             ];
-            return $this->client->search($criteria);
+            return $this->client->count($criteria);
         } catch (Exception $e) {
             $this->set_error($e->getCode(), $e->getMessage());
         }

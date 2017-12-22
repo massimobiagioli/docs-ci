@@ -9,7 +9,8 @@ class Api extends CI_Controller {
     private static $ROUTES = [
         'create_index' => 'post',
         'delete_index' => 'delete',
-        'index_document' => 'post'
+        'index_document' => 'post',
+        'search_documents' => 'get'
     ];
     
     public function rest_router($action) {

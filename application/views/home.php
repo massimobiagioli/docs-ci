@@ -95,7 +95,7 @@ $csrf = [
                 <form class="form-home" id="form-home-upload_file" 
                       class="form-horizontal" 
                       method="post"
-                      action="<?= site_url('home/search_documents') ?>"
+                      action="<?= site_url('home/prepare_search_documents') ?>"
                       data-update="home_search_results home_error_messages">  
 
                     <!-- Hidden -->

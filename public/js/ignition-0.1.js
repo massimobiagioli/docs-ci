@@ -7,11 +7,12 @@ var Ignition = (function() {
     
     var postUpdateFragmentActions = {
         renderDataTable: function(dataTableId) {
-            $('#' + dataTableId).DataTable({
+            var $dataTable = $('#' + dataTableId);
+            $dataTable.DataTable({
                 "searching": false,
                 "lengthChange": false,
                 "info": false,
-                "pageLength": 5,
+                "pageLength": $dataTable.data('pagelength'),
                 "pagingType": "full_numbers",
                 "language": {
                     "paginate": {
@@ -20,6 +21,11 @@ var Ignition = (function() {
                         "next": "<i class=\"fa fa-step-forward fa-fw\"></i>",
                         "last": "<i class=\"fa fa-fast-forward fa-fw\"></i>"
                     }
+                },
+                "serverSide": true,
+                ajax: {
+                    url: $dataTable.data('url'),
+                    type: 'POST'
                 }
             });
         }

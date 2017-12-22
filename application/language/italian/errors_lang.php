@@ -18,3 +18,4 @@ $lang['error_delete_index'] = 'Errore cancellazione indice';
 $lang['error_upload_document'] = 'Errore caricamento documento';
 $lang['error_index_document'] = 'Errore indicizzazione documento';
 $lang['error_search_documents'] = 'Errore ricerca documenti';
+$lang['error_count_documents'] = 'Errore coteggio documenti';

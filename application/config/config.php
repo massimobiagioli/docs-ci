@@ -458,6 +458,7 @@ $config['csrf_cookie_name'] = 'csrf_cookie';
 $config['csrf_expire'] = 7200;
 $config['csrf_regenerate'] = FALSE;
 $config['csrf_exclude_uris'] = array(
+    'home/search_documents',
     'api/create_index', 
     'api/delete_index', 
     'api/index_document');

@@ -86,11 +86,19 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 
 /*
 |--------------------------------------------------------------------------
-| CUSTOM CONSTANTS
+| SECURITY
 |--------------------------------------------------------------------------
 |
 */
 defined('USER_PASSWORD_SALT') OR define('USER_PASSWORD_SALT', 'b=whg&*M~JGrl|T(=+QIE`GUGzkS`|W%[GoFE/`14]S{n{Fa4p={vT+|gOixF.BW');
+
+/*
+|--------------------------------------------------------------------------
+| DATATABLE
+|--------------------------------------------------------------------------
+|
+*/
+defined('DATATABLE_DEFAULT_PAGELEN') OR define('DATATABLE_DEFAULT_PAGELEN', 5);
 
 /*
 |--------------------------------------------------------------------------

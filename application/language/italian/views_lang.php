@@ -35,3 +35,8 @@ $lang['search_results'] = 'Risultati della ricerca';
 $lang['search'] = 'Ricerca';
 $lang['free_search_placeholder'] = 'ricerca libera dei documenti ...';
 $lang['no_results'] = 'Nessun risultato!';
+$lang['results'] = 'Risultati';
+
+// Datatable Results
+$lang['dt_col_filename'] = 'Nome file';
+$lang['dt_col_created'] = 'Data creazione';

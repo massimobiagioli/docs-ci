@@ -205,9 +205,9 @@ class Doc_service {
     
     /**
      * Search documents
-     * @param string $free_search Free Text Search
+     * @param string $search_info Search info
      */
-    public function search_documents($free_search) {
+    public function search_documents($search_info) {
         $this->reset_status();
 
         try {
@@ -220,17 +220,55 @@ class Doc_service {
                 return;
             }
             
-            // Build search params
-            $params = null; // TODO
-            
             // Invoke DMS
             $dms = get_dms();
-            $result = $dms->search_documents($user['user_login'], $params);
+            $result = $dms->search_documents($user['user_login'], $search_info);
             if (!$result) {
                 $msg = $this->CI->lang->line('error_search_documents');
                 $this->set_status(ERROR_DMS, $msg, null, [
-                    'error_code' => $storage->last_error_code(),
-                    'error_description' => $storage->last_error_description()
+                    'error_code' => $dms->last_error_code(),
+                    'error_description' => $dms->last_error_description()
+                ]);
+                log_message('error', $msg . ' (' . $dms->last_error_code() . ' - ' . $dms->last_error_description() . ')');
+                return;
+            }
+
+            // Handle result
+            $this->set_status(ERROR_NONE, '', $result);
+            log_message('info', json_encode($result));    
+        } catch (Exception $e) {
+            $this->set_status(ERROR_UNHANDLED, $e->getCode() . ' - ' . $e->getMessage());
+            $msg = $e->getCode() . ' - ' . $e->getMessage();
+            $this->set_status(ERROR_UNHANDLED, $msg);
+            log_message('error', $msg);
+        }
+    }
+    
+    /**
+     * Count documents
+     * @param string $search_info Search info
+     */
+    public function count_documents($search_info) {
+        $this->reset_status();
+
+        try {
+            // Check auth
+            $user = $this->CI->auth->get_user();
+            if (!$user || !$this->CI->auth->is_user_admin($user)) {
+                $msg = $this->CI->lang->line('unauthorized');
+                $this->set_status(ERROR_AUTH, $msg);
+                log_message('error', $msg);
+                return;
+            }
+            
+            // Invoke DMS
+            $dms = get_dms();
+            $result = $dms->count_documents($user['user_login'], $search_info);
+            if (!$result) {
+                $msg = $this->CI->lang->line('error_count_documents');
+                $this->set_status(ERROR_DMS, $msg, null, [
+                    'error_code' => $dms->last_error_code(),
+                    'error_description' => $dms->last_error_description()
                 ]);
                 log_message('error', $msg . ' (' . $dms->last_error_code() . ' - ' . $dms->last_error_description() . ')');
                 return;

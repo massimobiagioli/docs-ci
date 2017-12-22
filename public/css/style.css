@@ -108,3 +108,10 @@ i#add_row_metadata,
 #document_metadata tbody tr td {
     padding: .4em;
 }
+.result-list-wrapper h3 {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2em;
+    text-transform: uppercase;
+    margin-bottom: 0;
+}

@@ -35,10 +35,18 @@ interface Dms {
     /**
      * Search documents
      * @param string $index Index   
-     * @param array $params Search params
+     * @param array $search_info Search info
      * @return array Documents
      */
-    public function search_documents($index, $params);
+    public function search_documents($index, $search_info);
+    
+    /**
+     * Count documents
+     * @param string $index Index   
+     * @param array $search_info Search info
+     * @return array Results
+     */
+    public function count_documents($index, $search_info);
     
     /**
      * @return Last error code
