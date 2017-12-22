@@ -15,7 +15,8 @@ $lang['error_create_index'] = 'Errore creazione indice';
 $lang['error_delete_index'] = 'Errore cancellazione indice';
 
 // Home
-$lang['error_upload_document'] = 'Errore caricamento documento';
+$lang['error_upload_document'] = 'Errore upload documento';
+$lang['error_getting_url_document'] = 'Errore lettura indirizzo documento';
 $lang['error_index_document'] = 'Errore indicizzazione documento';
 $lang['error_search_documents'] = 'Errore ricerca documenti';
-$lang['error_count_documents'] = 'Errore coteggio documenti';
+$lang['error_count_documents'] = 'Errore conteggio documenti';

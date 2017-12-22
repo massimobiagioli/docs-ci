@@ -5,6 +5,7 @@ require_once __DIR__ . '/Storage.php';
 require_once __DIR__ . '/Storage_super.php';
 
 use Filestack\FilestackClient;
+use Filestack\Filelink;
 
 /**
  * Storage - FileStack Implementation
@@ -27,6 +28,15 @@ class Storage_filestack extends Storage_super implements Storage {
         try {
             $link = $this->client->upload($path, ['filename' => $filename]);
             return $link;
+        } catch (Exception $e) {
+            $this->set_error($e->getCode(), $e->getMessage());
+        }
+    }
+
+    public function get_file_url($file_handle) {
+        try {
+            $filelink = new Filelink($file_handle, getenv('FILESTACK_APIKEY'));
+            return $filelink->url();
         } catch (Exception $e) {
             $this->set_error($e->getCode(), $e->getMessage());
         }

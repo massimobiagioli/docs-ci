@@ -114,6 +114,13 @@ class Dms_elastic extends Dms_super implements Dms {
                 $criteria['size'] = $search_info['length'];
             }
             
+//            // Sorting
+//            $criteria['body']['sort'] = [
+//                [
+//                    'document_metadata.tipologia' => ['order' => $search_info['sort_mode']]
+//                ]
+//            ];
+            
             return $this->client->search($criteria);
         } catch (Exception $e) {
             $this->set_error($e->getCode(), $e->getMessage());

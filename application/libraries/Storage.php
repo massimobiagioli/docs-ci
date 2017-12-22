@@ -14,5 +14,12 @@ interface Storage {
      */
     public function upload($path, $filename);
     
+    /**
+     * Download document
+     * @param string $file_handle File handle
+     * @return string File url
+     */
+    public function get_file_url($file_handle);
+    
 }
 

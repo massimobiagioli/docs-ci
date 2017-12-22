@@ -129,7 +129,7 @@ class Doc_service {
         try {
             // Check auth
             $user = $this->CI->auth->get_user();
-            if (!$user || !$this->CI->auth->is_user_admin($user)) {
+            if (!$user) {
                 $msg = $this->CI->lang->line('unauthorized');
                 $this->set_status(ERROR_AUTH, $msg);
                 log_message('error', $msg);
@@ -171,6 +171,7 @@ class Doc_service {
             // Add document metadata
             $metadata['document_info'] = [
                 'storage_filename' => $filename,
+                'storage_filehandle' => $result->handle,
                 'original_filename' => $file_to_upload['name'],
                 'created' => date('Y-m-d H:i:s')
             ];
@@ -213,7 +214,7 @@ class Doc_service {
         try {
             // Check auth
             $user = $this->CI->auth->get_user();
-            if (!$user || !$this->CI->auth->is_user_admin($user)) {
+            if (!$user) {
                 $msg = $this->CI->lang->line('unauthorized');
                 $this->set_status(ERROR_AUTH, $msg);
                 log_message('error', $msg);
@@ -254,7 +255,7 @@ class Doc_service {
         try {
             // Check auth
             $user = $this->CI->auth->get_user();
-            if (!$user || !$this->CI->auth->is_user_admin($user)) {
+            if (!$user) {
                 $msg = $this->CI->lang->line('unauthorized');
                 $this->set_status(ERROR_AUTH, $msg);
                 log_message('error', $msg);
@@ -279,6 +280,55 @@ class Doc_service {
             log_message('info', json_encode($result));    
         } catch (Exception $e) {
             $this->set_status(ERROR_UNHANDLED, $e->getCode() . ' - ' . $e->getMessage());
+            $msg = $e->getCode() . ' - ' . $e->getMessage();
+            $this->set_status(ERROR_UNHANDLED, $msg);
+            log_message('error', $msg);
+        }
+    }
+    
+    /**
+     * Download document
+     * @param string $storage_filehandle Storage file handle
+     */
+    public function get_document_url($storage_filehandle) {
+        $this->reset_status();
+
+        try {
+            // Check auth
+            $user = $this->CI->auth->get_user();
+            if (!$user) {
+                $msg = $this->CI->lang->line('unauthorized');
+                $this->set_status(ERROR_AUTH, $msg);
+                log_message('error', $msg);
+                return;
+            }
+
+            // Check params
+            if (!$storage_filehandle) {
+                $msg = $this->CI->lang->line('error_missing_parameter_filename');
+                $this->set_status(ERROR_PRECONDITION, $msg);
+                log_message('error', $msg);
+                return;
+            }
+
+            // Invoke storage
+            $storage = get_storage();
+            $document_url = $storage->get_file_url($storage_filehandle);
+            if (!$document_url) {
+                $msg = $this->CI->lang->line('error_getting_url_document');
+                $this->set_status(ERROR_STORAGE, $msg, null, [
+                    'error_code' => $storage->last_error_code(),
+                    'error_description' => $storage->last_error_description()
+                ]);
+                log_message('error', $msg . ' (' . $storage->last_error_code() . ' - ' . $storage->last_error_description() . ')');
+                return;
+            }
+
+            // Handle result
+            $msg = $this->CI->lang->line('got_file_url') . ':' . $document_url;
+            $this->set_status(ERROR_NONE, $msg, $document_url);
+            log_message('info', $msg);
+        } catch (Exception $e) {
             $msg = $e->getCode() . ' - ' . $e->getMessage();
             $this->set_status(ERROR_UNHANDLED, $msg);
             log_message('error', $msg);

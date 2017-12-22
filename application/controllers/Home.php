@@ -10,7 +10,7 @@ class Home extends CI_Controller {
             redirect('/');
             return;
         }
-        
+
         // Header
         $this->view_manager->load_header();
 
@@ -59,7 +59,7 @@ class Home extends CI_Controller {
     public function prepare_search_documents() {
         // Clear session data
         $this->session->unset_userdata('total_results');
-        
+
         // Prepare Datatable
         $params = [
             'url' => '/home/search_documents',
@@ -68,17 +68,13 @@ class Home extends CI_Controller {
         $this->ignition_client->set_fragment_data('home_search_results', $params, 'renderDataTable', 'search_results_datatable');
         $this->ignition_client->xmlResponse();
     }
-    
+
     public function search_documents() {
-        $draw = intval($this->input->post('draw'));
-        $start = intval($this->input->post('start'));
-        $length = intval($this->input->post('length'));
-        
         // Init search info
         $search_info = [
             'free_search' => $this->input->post('free_search')
         ];
-        
+
         // Count documents
         $total_results = $this->session->userdata('total_results');
         if (!$total_results) {
@@ -94,10 +90,14 @@ class Home extends CI_Controller {
             $total_results = $this->doc_service->get_result();
             $this->session->set_userdata('total_results', $total_results);
         }
-        
+
+        // Implements search info with pagination and sorting information
+        $search_info['start'] = intval($this->input->post('start'));
+        $search_info['length'] = intval($this->input->post('length'));
+        $search_info['sort_column'] = $this->input->post('order[0]column');
+        $search_info['sort_mode'] = $this->input->post('order[0]dir');
+
         // Search Documents
-        $search_info['start'] = $start;
-        $search_info['length'] = $length;
         $this->doc_service->search_documents($search_info);
         if ($this->doc_service->get_status() != ERROR_NONE) {
             if ($this->doc_service->get_status() === ERROR_AUTH) {
@@ -108,39 +108,43 @@ class Home extends CI_Controller {
             return;
         }
         $results = $this->doc_service->get_result();
-        
+
         // Prepare Datatable Results
         $datatable_results = [
-            'draw' => $draw,
+            'draw' => intval($this->input->post('draw')),
             'recordsTotal' => $total_results['count'],
             'recordsFiltered' => $total_results['count']
         ];
-        
+
         // Loop over results
         foreach ($results['hits']['hits'] as $result) {
             $datatable_results['data'][] = [
                 $result['_source']['document_info']['original_filename'],
                 $result['_source']['document_info']['created'],
-                '<div class="document-download text-center"><a href="home/download_document?storage_id=' . 
-                    $result['_source']['document_info']['storage_filename'] . 
-                    '"><i class="fa fa-cloud-download"></i><div></a>'
+                '<div class="document-download text-center"><a href="home/get_document_url?file_handle=' .
+                $result['_source']['document_info']['storage_filehandle'] .
+                '" target="_blank"><i class="fa fa-cloud-download"></i><div></a>'
             ];
         }
-       
+
         $this->output
                 ->set_content_type('application/json')
                 ->set_output(json_encode($datatable_results));
     }
-    
-    public function download_document() {
-        $storage_filename = $this->input->get('storage_id');
-        
-        // TODO ....
-        $this->output
-                ->set_content_type('text/plain')
-                ->set_output(json_encode($storage_filename));
+
+    public function get_document_url() {
+        $this->doc_service->get_document_url($this->input->get('file_handle'));
+        if ($this->doc_service->get_status() != ERROR_NONE) {
+            if ($this->doc_service->get_status() === ERROR_AUTH) {
+                $this->handle_unauthorized();
+            } else {
+                $this->handle_error($this->doc_service->get_message(), $this->doc_service->get_native_status());
+            }
+            return;
+        }
+        redirect($this->doc_service->get_result());
     }
-    
+
     private function handle_unauthorized() {
         redirect('/');
     }
