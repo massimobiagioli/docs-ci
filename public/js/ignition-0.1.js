@@ -22,6 +22,9 @@ var Ignition = (function() {
                         "last": "<i class=\"fa fa-fast-forward fa-fw\"></i>"
                     }
                 },
+                "columnDefs": [
+                    { orderable: false, targets: 2 }
+                ],
                 "serverSide": true,
                 ajax: {
                     url: $dataTable.data('url'),
