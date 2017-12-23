@@ -108,8 +108,9 @@ class Doc_service {
             }
 
             // Handle result
-            $this->set_status(ERROR_NONE, $this->CI->lang->line('index_deleted') . ':' . $index_name, $result);
-            log_message('info', $msg . ' (' . json_encode($result) . ')');    
+            $msg = $this->CI->lang->line('index_deleted') . ':' . $index_name;
+            $this->set_status(ERROR_NONE, $msg, $result);
+            log_message('info', $msg . ' (' . json_encode($result) . ')');
         } catch (Exception $e) {
             $this->set_status(ERROR_UNHANDLED, $e->getCode() . ' - ' . $e->getMessage());
             $msg = $e->getCode() . ' - ' . $e->getMessage();
