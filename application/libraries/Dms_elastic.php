@@ -49,6 +49,10 @@ class Dms_elastic extends Dms_super implements Dms {
                                 'excludes' => [
                                     'data'
                                 ]
+                            ],
+                            'properties' => [
+                                'document_info.original_filename' => ['type' => 'keyword'],
+                                'document_info.created' => ['type' => 'keyword']
                             ]
                         ]
                     ]
@@ -114,12 +118,10 @@ class Dms_elastic extends Dms_super implements Dms {
                 $criteria['size'] = $search_info['length'];
             }
             
-//            // Sorting
-//            $criteria['body']['sort'] = [
-//                [
-//                    'document_metadata.tipologia' => ['order' => $search_info['sort_mode']]
-//                ]
-//            ];
+            // Sorting
+            $criteria['body']['sort'] = [
+                [$search_info['sort_field'] => ['order' => $search_info['sort_mode']]]
+            ];
             
             return $this->client->search($criteria);
         } catch (Exception $e) {

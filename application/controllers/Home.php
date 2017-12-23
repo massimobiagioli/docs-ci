@@ -3,7 +3,12 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Home extends CI_Controller {
-
+    
+    private static $SORT_MAPPING = [
+        'document_info.original_filename',
+        'document_info.created'
+    ];
+    
     public function index() {
         $logged_user = $this->session->userdata('logged_user');
         if (!$logged_user) {
@@ -94,8 +99,9 @@ class Home extends CI_Controller {
         // Implements search info with pagination and sorting information
         $search_info['start'] = intval($this->input->post('start'));
         $search_info['length'] = intval($this->input->post('length'));
-        $search_info['sort_column'] = $this->input->post('order[0]column');
-        $search_info['sort_mode'] = $this->input->post('order[0]dir');
+        $order_info = $this->input->post('order');
+        $search_info['sort_field'] = self::$SORT_MAPPING[$order_info[0]['column']];
+        $search_info['sort_mode'] = $order_info[0]['dir'];
 
         // Search Documents
         $this->doc_service->search_documents($search_info);
