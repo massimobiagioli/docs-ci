@@ -126,24 +126,24 @@ class Dms_elastic extends Dms_super implements Dms {
         }
     }
     
-    private function build_search_criteria($index, $free_search, $exclude_source = true) {
+    private function build_search_criteria($index, $free_search = '', $exclude_source = true) {
         $criteria = [
             'index' => $index,
             'type' => self::DOCUMENT_TYPE,
-            'body' => [
-                'query' => [
-                    'multi_match' => [
-                        'query' => $free_search,
-                        'type' => 'phrase_prefix',
-                        'fields' => [ 
-                            'document_metadata.*', 
-                            'attachment.content', 
-                            'document_info.original_filename'
-                        ] 
-                    ]
-                ]
-            ]
         ];
+        if ($free_search) {
+            $criteria['body']['query'] = [
+                'multi_match' => [
+                    'query' => $free_search,
+                    'type' => 'phrase_prefix',
+                    'fields' => [ 
+                        'document_metadata.*', 
+                        'attachment.content', 
+                        'document_info.original_filename'
+                    ] 
+                ]
+            ];
+        }
         if ($exclude_source) {
             $criteria['body']['_source'] = ['document_*', 'attachment.content_type'];
         }

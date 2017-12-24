@@ -4,7 +4,7 @@
     </div>
     <div class="col-12">
         <table id="search_results_datatable" 
-           class="table table-striped table-bordered"
+           class="table table-striped table-bordered dt-responsive nowrap"
            data-url="<?php echo $url; ?>"
            data-pagelength="<?php echo $page_length; ?>"
            cellspacing="0" width="100%">
