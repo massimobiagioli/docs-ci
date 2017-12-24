@@ -108,9 +108,11 @@ class Dms_elastic extends Dms_super implements Dms {
             }
             
             // Sorting
-            $criteria['body']['sort'] = [
-                [$search_info['sort_field'] => ['order' => $search_info['sort_mode']]]
-            ];
+            if (isset($search_info['sort_field'])) {
+                $criteria['body']['sort'] = [
+                    [$search_info['sort_field'] => ['order' => isset($search_info['sort_mode']) ? $search_info['sort_mode'] : 'asc']]
+                ];
+            }
             
             return $this->client->search($criteria);
         } catch (Exception $e) {
