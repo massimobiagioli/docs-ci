@@ -97,18 +97,7 @@ class Dms_elastic extends Dms_super implements Dms {
 
     public function search_documents($index, $search_info) {
         try {
-            $criteria = [
-                'index' => $index,
-                'type' => self::DOCUMENT_TYPE,
-                "_source" => ["document_*", "attachment.content_type"]
-//                'body' => [
-//                    'query' => [
-//                        'match' => [
-//                            'testField' => 'abc'
-//                        ]
-//                    ]
-//                ]
-            ];
+            $criteria = $this->build_search_criteria($index, $search_info['free_search']);
             
             // Pagination
             if (isset($search_info['start'])) {
@@ -131,21 +120,34 @@ class Dms_elastic extends Dms_super implements Dms {
 
     public function count_documents($index, $search_info) {
         try {
-            $criteria = [
-                'index' => $index,
-                'type' => self::DOCUMENT_TYPE,
-//                'body' => [
-//                    'query' => [
-//                        'match' => [
-//                            'testField' => 'abc'
-//                        ]
-//                    ]
-//                ]
-            ];
-            return $this->client->count($criteria);
+            return $this->client->count($this->build_search_criteria($index, $search_info['free_search'], false));
         } catch (Exception $e) {
             $this->set_error($e->getCode(), $e->getMessage());
         }
     }
-
+    
+    private function build_search_criteria($index, $free_search, $exclude_source = true) {
+        $criteria = [
+            'index' => $index,
+            'type' => self::DOCUMENT_TYPE,
+            'body' => [
+                'query' => [
+                    'multi_match' => [
+                        'query' => $free_search,
+                        'type' => 'phrase_prefix',
+                        'fields' => [ 
+                            'document_metadata.*', 
+                            'attachment.content', 
+                            'document_info.original_filename'
+                        ] 
+                    ]
+                ]
+            ]
+        ];
+        if ($exclude_source) {
+            $criteria['body']['_source'] = ['document_*', 'attachment.content_type'];
+        }
+        return $criteria;
+    }
+    
 }

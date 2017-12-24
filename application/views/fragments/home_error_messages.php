@@ -3,5 +3,5 @@
         <?php foreach ($error_messages as $error_message): ?>
             <div><?php echo $error_message; ?></div>
         <?php endforeach; ?>
-    </div>
+    </div>    
 <?php endif; ?>

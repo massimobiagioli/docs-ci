@@ -64,6 +64,10 @@ class Home extends CI_Controller {
     public function prepare_search_documents() {
         // Clear session data
         $this->session->unset_userdata('total_results');
+        
+        // Read search input and store it in session
+        $free_search = $this->input->post('free_search');
+        $this->session->set_userdata('free_search', $free_search);
 
         // Prepare Datatable
         $params = [
@@ -77,7 +81,7 @@ class Home extends CI_Controller {
     public function search_documents() {
         // Init search info
         $search_info = [
-            'free_search' => $this->input->post('free_search')
+            'free_search' => $this->session->userdata('free_search')
         ];
 
         // Count documents
@@ -164,5 +168,5 @@ class Home extends CI_Controller {
         $this->ignition_client->set_fragment_data('home_result', ['result' => $message]);
         $this->ignition_client->xmlResponse();
     }
-
+    
 }
