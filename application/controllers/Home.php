@@ -127,6 +127,7 @@ class Home extends CI_Controller {
         ];
 
         // Loop over results
+        $datatable_results['data'] = [];
         foreach ($results['hits']['hits'] as $result) {
             $datatable_results['data'][] = [
                 $result['_source']['document_info']['original_filename'],

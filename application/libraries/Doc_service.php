@@ -44,7 +44,10 @@ class Doc_service {
                 log_message('error', $msg);
                 return;
             }
-
+            
+            // Sanitize input
+            $index_name = sanitize_index($index_name);
+            
             // Invoke dms
             $dms = get_dms();
             $result = $dms->create_index($index_name);
@@ -93,7 +96,10 @@ class Doc_service {
                 log_message('error', $msg);
                 return;
             }
-
+            
+            // Sanitize input
+            $index_name = sanitize_index($index_name);
+            
             // Invoke dms
             $dms = get_dms();
             $result = $dms->delete_index($index_name);
@@ -165,6 +171,11 @@ class Doc_service {
             foreach ($data as $key => $value) {
                 if (strtolower(substr($key, 0, 3)) === 'key') {
                     $vk = 'value' . substr($key, 3);
+                    
+                    // sanitize metadata
+                    $value = sanitize_metadata($value);
+                    
+                    // add metadata key-value
                     $metadata['document_metadata'][$value] = $data[$vk];
                 }
             }

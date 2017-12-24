@@ -20,7 +20,8 @@ var CustomModule = (function() {
                         "previous": "<i class=\"fa fa-step-backward fa-fw\"></i>",
                         "next": "<i class=\"fa fa-step-forward fa-fw\"></i>",
                         "last": "<i class=\"fa fa-fast-forward fa-fw\"></i>"
-                    }
+                    },
+                    "emptyTable" : $dataTable.data('noresultsmsg')
                 },
                 "columnDefs": [
                     { orderable: false, targets: 2 }

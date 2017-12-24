@@ -7,6 +7,7 @@
            class="table table-striped table-bordered dt-responsive nowrap"
            data-url="<?php echo $url; ?>"
            data-pagelength="<?php echo $page_length; ?>"
+           data-noresultsmsg="<?php echo $this->lang->line('no_results'); ?>"
            cellspacing="0" width="100%">
         <thead>
             <tr>
