@@ -4,7 +4,7 @@ $(function () {
     // Form submit
     $('.form-home').submit(function (evt) {
         evt.preventDefault();
-        Ignition.sendRequest(this);
+        Core.sendRequest(this);
     });
     
     // Add row to metadata

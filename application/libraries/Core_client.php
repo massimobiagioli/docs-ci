@@ -2,10 +2,10 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * Ignition client communication
+ * Core client communication
  * @author Massimo Biagioli <biagiolimassimo@gmail.com>
  */
-class Ignition_client {
+class Core_client {
 
     private $CI;
     private $messages;

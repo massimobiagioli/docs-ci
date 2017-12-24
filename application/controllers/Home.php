@@ -74,8 +74,8 @@ class Home extends CI_Controller {
             'url' => '/home/search_documents',
             'page_length' => DATATABLE_DEFAULT_PAGELEN
         ];
-        $this->ignition_client->set_fragment_data('home_search_results', $params, 'renderDataTable', 'search_results_datatable');
-        $this->ignition_client->xmlResponse();
+        $this->core_client->set_fragment_data('home_search_results', $params, 'renderDataTable', 'search_results_datatable');
+        $this->core_client->xmlResponse();
     }
 
     public function search_documents() {
@@ -160,13 +160,13 @@ class Home extends CI_Controller {
     }
 
     private function handle_error($error_message, $native_status) {
-        $this->ignition_client->set_fragment_data('home_error_messages', ['error_messages' => [$error_message]]);
-        $this->ignition_client->xmlResponse();
+        $this->core_client->set_fragment_data('home_error_messages', ['error_messages' => [$error_message]]);
+        $this->core_client->xmlResponse();
     }
 
     private function handle_result($message, $result) {
-        $this->ignition_client->set_fragment_data('home_result', ['result' => $message]);
-        $this->ignition_client->xmlResponse();
+        $this->core_client->set_fragment_data('home_result', ['result' => $message]);
+        $this->core_client->xmlResponse();
     }
     
 }

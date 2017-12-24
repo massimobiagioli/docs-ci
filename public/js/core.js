@@ -9,7 +9,7 @@ $(document)
   });
 
 // Core
-var Ignition = (function() {
+var Core = (function() {
     
     var postUpdateFragmentActions = {
         renderDataTable: function(dataTableId) {

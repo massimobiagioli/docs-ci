@@ -50,15 +50,15 @@ class Admin extends CI_Controller {
             if (is_cli()) {
                 show_error($this->migration->error_string());
             } else {
-                $this->ignition_client->set_fragment_data('admin_error_messages', ['error_messages' => [$this->migration->error_string()]]);
+                $this->core_client->set_fragment_data('admin_error_messages', ['error_messages' => [$this->migration->error_string()]]);
             }            
         } else {
             if (!is_cli()) {
-                $this->ignition_client->set_fragment_data('admin_result', ['result' => $this->lang->line('migrations_executed')]);
+                $this->core_client->set_fragment_data('admin_result', ['result' => $this->lang->line('migrations_executed')]);
             }            
         }
         
-        $this->ignition_client->xmlResponse();
+        $this->core_client->xmlResponse();
     }
     
     public function create_index() {
@@ -92,12 +92,12 @@ class Admin extends CI_Controller {
     }
 
     private function handle_error($error_message, $native_status) {
-        $this->ignition_client->set_fragment_data('admin_error_messages', ['error_messages' => [$error_message]]);
-        $this->ignition_client->xmlResponse();
+        $this->core_client->set_fragment_data('admin_error_messages', ['error_messages' => [$error_message]]);
+        $this->core_client->xmlResponse();
     }
 
     private function handle_result($message, $result) {
-        $this->ignition_client->set_fragment_data('admin_result', ['result' => $message]);
-        $this->ignition_client->xmlResponse();
+        $this->core_client->set_fragment_data('admin_result', ['result' => $message]);
+        $this->core_client->xmlResponse();
     }
 }

@@ -33,7 +33,7 @@ class Login extends CI_Controller {
         // Store logged user in session
         if ($result) {
             $this->session->set_userdata(['logged_user' => $result]);
-            $this->ignition_client->addMessage([
+            $this->core_client->addMessage([
                 'type' => 'location',
                 'metadata' => [
                     'href' => site_url('home')
@@ -45,11 +45,11 @@ class Login extends CI_Controller {
                     $this->lang->line('error_invalid_login')
                 ]
             ];
-            $this->ignition_client->set_fragment_data('login_error_messages', $login_error_messages_data);
+            $this->core_client->set_fragment_data('login_error_messages', $login_error_messages_data);
         }
         
         // Handle response
-        $this->ignition_client->xmlResponse();
+        $this->core_client->xmlResponse();
     }
 
 }
