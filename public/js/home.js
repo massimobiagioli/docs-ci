@@ -8,7 +8,7 @@ $(function () {
     });
     
     // Add row to metadata
-    $("#add_row_metadata").click(function () {
+    $('#add_row_metadata').click(function () {
         var rowContent = '<td><input name="key' + rowIndex + 
                 '" type="text" class="form-control input-md" />' +
                 '<td><input name="value' + rowIndex + 
@@ -22,8 +22,15 @@ $(function () {
     });
     
     // Delete row from metadata
-    $("body").on('click', '.delete_row_metadata', function() {
+    $('body').on('click', '.delete_row_metadata', function(evt) {
         var index = $(this).data('rowid');        
-        $("#metadata_row_" + index).html('');        
+        $('#metadata_row_' + index).html('');        
+    });
+    
+    // Document actions
+    $('body').on('click', 'a.document-action', function(evt) {
+        evt.preventDefault();
+        var action = $(this).attr('href'); 
+        alert(action);
     });
 });

@@ -132,9 +132,20 @@ class Home extends CI_Controller {
             $datatable_results['data'][] = [
                 $result['_source']['document_info']['original_filename'],
                 $result['_source']['document_info']['created'],
-                '<div class="document-download text-center"><a href="home/get_document_url?file_handle=' .
-                $result['_source']['document_info']['storage_filehandle'] .
-                '" target="_blank"><i class="fa fa-cloud-download"></i><div></a>'
+                '<div class="text-center">' .
+                    '<a class="ml-3 document-action" href="home/show_document_info?doc_id=' .
+                        $result['_id'] .
+                        '" target="_blank"><i class="fa fa-info"></i>' .
+                    '</a>' .
+                    '<a class="ml-3" href="home/get_document_url?file_handle=' .
+                        $result['_source']['document_info']['storage_filehandle'] .
+                        '" target="_blank"><i class="fa fa-cloud-download"></i>' .
+                    '</a>' .
+                    '<a class="ml-3 document-action" href="home/delete_document?doc_id=' .
+                        $result['_id'] .
+                        '" target="_blank"><i class="fa fa-trash"></i>' .
+                    '</a>' .
+                '</div>'
             ];
         }
 

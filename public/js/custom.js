@@ -24,7 +24,8 @@ var CustomModule = (function() {
                     "emptyTable" : $dataTable.data('noresultsmsg')
                 },
                 "columnDefs": [
-                    { orderable: false, targets: 2 }
+                    { "orderable": false, "targets": 2 },
+                    { "width": "10%", "targets": 2 }
                 ],
                 "serverSide": true,
                 ajax: {
