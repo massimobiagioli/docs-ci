@@ -10,6 +10,7 @@ class Api extends CI_Controller {
         'create_index' => 'post',
         'delete_index' => 'delete',
         'index_document' => 'post',
+        'count_documents' => 'get',
         'search_documents' => 'get'
     ];
     
@@ -51,6 +52,24 @@ class Api extends CI_Controller {
     
     private function index_document() {
         $this->doc_service->index_document($_FILES['file_to_upload'], $this->input->post());
+        if ($this->doc_service->get_status() == ERROR_NONE) {
+            $this->handle_result($this->doc_service->get_message(), $this->doc_service->get_result());
+        } else {
+            if ($this->doc_service->get_status() === ERROR_AUTH) {
+                $this->handle_unauthorized();
+            } else {
+                $this->handle_error($this->doc_service->get_message(), $this->doc_service->get_native_status());
+            }
+        }
+    }
+    
+    private function count_documents() {
+        // Init search info
+        $search_info = [
+            'free_search' => $this->input->get('free_search')
+        ];
+        // Invoke doc service
+        $this->doc_service->count_documents($search_info);
         if ($this->doc_service->get_status() == ERROR_NONE) {
             $this->handle_result($this->doc_service->get_message(), $this->doc_service->get_result());
         } else {

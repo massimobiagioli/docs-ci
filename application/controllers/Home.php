@@ -122,8 +122,8 @@ class Home extends CI_Controller {
         // Prepare Datatable Results
         $datatable_results = [
             'draw' => intval($this->input->post('draw')),
-            'recordsTotal' => $total_results['count'],
-            'recordsFiltered' => $total_results['count']
+            'recordsTotal' => $total_results,
+            'recordsFiltered' => $total_results
         ];
 
         // Loop over results

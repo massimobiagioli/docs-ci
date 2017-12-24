@@ -61,3 +61,5 @@ $route['translate_uri_dashes'] = FALSE;
 $route['api/create_index']['post'] = 'api/rest_router/create_index';
 $route['api/delete_index']['delete'] = 'api/rest_router/delete_index';
 $route['api/index_document']['post'] = 'api/rest_router/index_document';
+$route['api/count_documents']['get'] = 'api/rest_router/count_documents';
+$route['api/search_documents']['get'] = 'api/rest_router/search_documents';

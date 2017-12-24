@@ -288,8 +288,8 @@ class Doc_service {
             }
 
             // Handle result
-            $this->set_status(ERROR_NONE, '', $result);
-            log_message('info', json_encode($result));    
+            $this->set_status(ERROR_NONE, '', $result['count']);
+            log_message('info', json_encode($result['count']));    
         } catch (Exception $e) {
             $this->set_status(ERROR_UNHANDLED, $e->getCode() . ' - ' . $e->getMessage());
             $msg = $e->getCode() . ' - ' . $e->getMessage();
