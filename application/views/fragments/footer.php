@@ -9,10 +9,10 @@
         <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
         <script src="https://cdn.datatables.net/responsive/2.2.1/js/dataTables.responsive.min.js"></script>
         <script src="https://cdn.datatables.net/responsive/2.2.1/js/responsive.bootstrap4.min.js"></script>
-        <!-- Common Script -->
-        <script src="<?php echo base_url() . 'public/js/script.js'; ?>"></script>
         <!-- Ignition -->
         <script src="<?php echo base_url() . 'public/js/ignition-0.1.js'; ?>"></script>
+        <!-- Custom Script -->
+        <script src="<?php echo base_url() . 'public/js/custom.js'; ?>"></script>
         
         <!-- Custom Scripts -->
         <?php if (!empty($custom_scripts)): ?>

@@ -1,36 +1,20 @@
-/**
- * Ignition Module
- * @author Massimo Biagioli
- * @version 0.1
- */
+// Ajax Loader
+var $loading = $('.loading').hide();
+$(document)
+  .ajaxStart(function () {
+    $loading.show();
+  })
+  .ajaxStop(function () {
+    $loading.hide();
+  });
+
+// Core
 var Ignition = (function() {
     
     var postUpdateFragmentActions = {
         renderDataTable: function(dataTableId) {
             var $dataTable = $('#' + dataTableId);
-            $dataTable.DataTable({
-                "searching": false,
-                "lengthChange": false,
-                "info": false,
-                "pageLength": $dataTable.data('pagelength'),
-                "pagingType": "full_numbers",
-                "language": {
-                    "paginate": {
-                        "first": "<i class=\"fa fa-fast-backward fa-fw\"></i>",
-                        "previous": "<i class=\"fa fa-step-backward fa-fw\"></i>",
-                        "next": "<i class=\"fa fa-step-forward fa-fw\"></i>",
-                        "last": "<i class=\"fa fa-fast-forward fa-fw\"></i>"
-                    }
-                },
-                "columnDefs": [
-                    { orderable: false, targets: 2 }
-                ],
-                "serverSide": true,
-                ajax: {
-                    url: $dataTable.data('url'),
-                    type: 'POST'
-                }
-            });
+            $dataTable.DataTable(CustomModule.getDataTableConfig('results', $dataTable));
         }
     };
     
