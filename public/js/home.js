@@ -27,10 +27,4 @@ $(function () {
         $('#metadata_row_' + index).html('');        
     });
     
-    // Document actions
-    $('body').on('click', 'a.document-action', function(evt) {
-        evt.preventDefault();
-        var action = $(this).attr('href'); 
-        alert(action);
-    });
 });

@@ -35,12 +35,12 @@ $csrf = [
                         <label class="btn btn-success" for="file_to_upload">
                             <input id="file_to_upload" name="file_to_upload" type="file" style="display:none" 
                                    onchange="$('#upload-file-info').html(this.files[0].name)">
-                            <?php echo $this->lang->line('browse'); ?>
+                                   <?php echo $this->lang->line('browse'); ?>
                         </label>
                         <span class="label label-info" id="upload-file-info"></span>
                         <hr class="mt-0 mb-1">
                     </div>
-                    
+
                     <!-- Metadata -->
                     <div class="home-document-metadata form-group mt-2">
                         <div class="clearfix">
@@ -54,29 +54,29 @@ $csrf = [
                                     <th class="text-center"><?php echo $this->lang->line('value'); ?></th>                                            
                                 </tr>
                             </thead>
-				<tbody>
-                                    <tr id="metadata_row_0">                                       
-                                        <td>
-                                            <input type="text" name="key0"                                                     
-                                                   class="form-control"/>
-                                        </td>
-                                        <td>
-                                            <input type="text" name="value0"                                                     
-                                                   class="form-control"/>
-                                        </td>
-                                        <td>
-                                            <div class="metadata-icons"> 
-                                                <i class="delete_row_metadata fa fa-trash fa-2x" 
-                                                   data-rowid="0"
-                                                   aria-hidden="true"></i>
-                                            </div> <!-- .metadata-icons -->
-                                        </td>
-                                    </tr>
-                                    <tr id="metadata_row_1"></tr>
-				</tbody>
-			</table>
+                            <tbody>
+                                <tr id="metadata_row_0">                                       
+                                    <td>
+                                        <input type="text" name="key0"                                                     
+                                               class="form-control"/>
+                                    </td>
+                                    <td>
+                                        <input type="text" name="value0"                                                     
+                                               class="form-control"/>
+                                    </td>
+                                    <td>
+                                        <div class="metadata-icons"> 
+                                            <i class="delete_row_metadata fa fa-trash fa-2x" 
+                                               data-rowid="0"
+                                               aria-hidden="true"></i>
+                                        </div> <!-- .metadata-icons -->
+                                    </td>
+                                </tr>
+                                <tr id="metadata_row_1"></tr>
+                            </tbody>
+                        </table>
                     </div>
-                    
+
                     <!-- Buttons -->                                
                     <div class="home-item-buttons form-group mb-1">
                         <input type="submit" value="<?php echo $this->lang->line('load'); ?>" class="btn btn-primary">
@@ -84,7 +84,7 @@ $csrf = [
                 </form>
             </div> <!-- .home-item-wrapper -->
         </div> <!-- .col -->
-        
+
         <!-- SEARCH -->
         <div class="col-12 col-md-6 mt-4">        
             <div class="card text-center home-item-wrapper p-2">
@@ -109,7 +109,7 @@ $csrf = [
                                placeholder="<?php echo $this->lang->line('free_search_placeholder'); ?>"
                                class="form-control">
                     </div>
-                    
+
                     <!-- Buttons -->                                
                     <div class="home-item-buttons form-group mb-1">
                         <input type="submit" value="<?php echo $this->lang->line('search'); ?>" class="btn btn-primary">
@@ -118,12 +118,12 @@ $csrf = [
             </div> <!-- .home-item-wrapper -->
         </div> <!-- .col -->
     </div> <!-- .row -->
-    
+
     <!-- RESULTS -->
     <div class="row">
         <div id="home_search_results" class="col-12 mt-4"></div>
     </div> <!-- .row -->
-    
+
     <!-- MESSAGES -->
     <div class="row mt-4 mr-2 ml-2">
         <div id="home_error_messages" class="col-12">
@@ -134,5 +134,48 @@ $csrf = [
             <?php echo $home_result; ?>
         </div>
     </div>
+
+    <!-- DIALOG: DOCUMENT INFO -->
+    <div class="modal fade" id="dlg_document_info" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Info documento</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    esempio di dialog
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div> <!-- #dlg_document_info -->
+    
+    <!-- DIALOG: DELETE DOCUMENT -->
+    <div class="modal fade" id="dlg_document_delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Cancella il documento</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    cancella il documento
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div> <!-- #dlg_document_delete -->
+
 
 </div> <!-- .content-wrapper -->
