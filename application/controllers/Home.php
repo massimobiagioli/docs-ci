@@ -133,15 +133,17 @@ class Home extends CI_Controller {
                 $result['_source']['document_info']['original_filename'],
                 $result['_source']['document_info']['created'],
                 '<div class="text-center">' .
-                    '<a class="ml-3" href="#" data-docid="' . $result['_id'] . '"' .
-                        ' data-toggle="modal" data-target="#dlg_document_info"><i class="fa fa-info"></i>' .
+                    '<a class="ml-3" href="#" data-action="' . site_url('home/prepare_document_info_dialog/' . $result['_id']) . '"' .
+                        ' data-update="home_dlg_document_info"' .
+                        ' data-toggle="modal" data-target="#home_dlg_document_info"><i class="fa fa-info"></i>' .
                     '</a>' .
                     '<a class="ml-3" href="home/get_document_url?file_handle=' .
                         $result['_source']['document_info']['storage_filehandle'] .
                         '" target="_blank"><i class="fa fa-cloud-download"></i>' .
                     '</a>' .
-                    '<a class="ml-3" href="#" data-docid="' . $result['_id'] . '"' .
-                        ' data-toggle="modal" data-target="#dlg_document_delete"><i class="fa fa-trash"></i>' .
+                    '<a class="ml-3" href="#" data-action="' . site_url('home/prepare_document_info_dialog/' . $result['_id']) . '"' .
+                        ' data-update="home_dlg_document_delete"' .
+                        ' data-toggle="modal" data-target="#home_dlg_document_delete"><i class="fa fa-trash"></i>' .
                     '</a>' .
                 '</div>'
             ];
@@ -164,7 +166,15 @@ class Home extends CI_Controller {
         }
         redirect($this->doc_service->get_result());
     }
-
+    
+    public function prepare_document_info_dialog($document_id) {
+        $this->core_client->xmlResponse();
+    }
+    
+    public function prepare_document_delete_dialog($document_id) {
+        $this->core_client->xmlResponse();
+    }
+    
     private function handle_unauthorized() {
         redirect('/');
     }

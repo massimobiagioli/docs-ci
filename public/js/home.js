@@ -27,4 +27,10 @@ $(function () {
         $('#metadata_row_' + index).html('');        
     });
     
+    // Document dialog
+    $('.home-dialog').on('show.bs.modal', function(evt) {
+        evt.preventDefault();
+        Core.sendRequest(evt.relatedTarget);
+    });
+    
 });

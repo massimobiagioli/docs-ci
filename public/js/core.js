@@ -35,7 +35,7 @@ var Core = (function() {
         if ($sender.data('update')) {
             formData.append('update', $sender.data('update'));
         }
-                
+        
         $.ajax({
             url: action,
             type: 'post',
