@@ -33,6 +33,14 @@ interface Dms {
     public function index_document($index, $metadata, $id = null);
     
     /**
+     * Get document
+     * @param string $index Index   
+     * @param string $id Document Id
+     * @return array Document
+     */
+    public function get_document($index, $id);
+    
+    /**
      * Search documents
      * @param string $index Index   
      * @param array $search_info Search info

@@ -145,7 +145,7 @@ class Home extends CI_Controller {
                         $result['_source']['document_info']['storage_filehandle'] .
                         '" target="_blank"><i class="fa fa-cloud-download"></i>' .
                     '</a>' .
-                    '<a class="ml-3" href="#" data-action="' . site_url('home/prepare_document_info_dialog/' . $result['_id']) . '"' .
+                    '<a class="ml-3" href="#" data-action="' . site_url('home/prepare_document_delete_dialog/' . $result['_id']) . '"' .
                         ' data-update="home_dlg_document_delete_body"' .
                         ' data-csrftokenname="' . $csrf_token_name . '"' .
                         ' data-csrfhash="' . $csrf_hash . '"' .                
@@ -173,12 +173,49 @@ class Home extends CI_Controller {
         redirect($this->doc_service->get_result());
     }
     
-    public function prepare_document_info_dialog($document_id) {
+    public function prepare_document_info_dialog($document_id) {        
+        $data = [];
+        $this->doc_service->get_document($document_id);
+        if ($this->doc_service->get_status() != ERROR_NONE) {
+            if ($this->doc_service->get_status() === ERROR_AUTH) {
+                $this->handle_unauthorized();
+            } else {
+                $data['error_message'] = $this->doc_service->get_message();                
+            }            
+        } else {
+            $data['document'] = $this->doc_service->get_result();
+        }
+        $this->core_client->set_fragment_data('home_dlg_document_info_body', $data);
         $this->core_client->xmlResponse();
     }
     
     public function prepare_document_delete_dialog($document_id) {
+        $data = [];
+        $this->doc_service->get_document($document_id);
+        if ($this->doc_service->get_status() != ERROR_NONE) {
+            if ($this->doc_service->get_status() === ERROR_AUTH) {
+                $this->handle_unauthorized();
+            } else {
+                $data['error_message'] = $this->doc_service->get_message();                
+            }            
+        } else {
+            $data['document'] = $this->doc_service->get_result();
+        }
+        $this->core_client->set_fragment_data('home_dlg_document_delete_body', $data);
         $this->core_client->xmlResponse();
+    }
+    
+    public function confirm_delete_document() {
+        $this->doc_service->delete_document($this->input->post('docid'));
+        if ($this->doc_service->get_status() == ERROR_NONE) {
+            $this->handle_result($this->doc_service->get_message(), $this->doc_service->get_result());
+        } else {
+            if ($this->doc_service->get_status() === ERROR_AUTH) {
+                $this->handle_unauthorized();
+            } else {
+                $this->handle_error($this->doc_service->get_message(), $this->doc_service->get_native_status());
+            }
+        }
     }
     
     private function handle_unauthorized() {

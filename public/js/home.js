@@ -37,4 +37,18 @@ $(function () {
         Core.sendRequest(evt.relatedTarget, csrf);
     });
     
+    // Confirm delete
+    $('#home_dlg_document_confirm_delete').click(function(evt) {        
+        var $csrf = $('#home_dlg_document_delete_csrf');
+        var csrf = {
+            'token': $csrf.data('csrftokenname'),
+            'hash': $csrf.data('csrfhash')
+        };   
+        var docid = $('#home_dlg_document_delete_docid').data('docid');
+        var additionalData = {
+            'docid': docid
+        };        
+        Core.sendRequest(evt.currentTarget, csrf, additionalData);
+    });
+    
 });

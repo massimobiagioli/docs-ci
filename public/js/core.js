@@ -22,8 +22,9 @@ var Core = (function() {
      * Send request to CI
      * @param object sender
      * @param object csrf
+     * @param object additionalData
      */
-    var sendRequest = function(sender, csrf) {
+    var sendRequest = function(sender, csrf, additionalData) {
         var $sender = $(sender);
         var action = $sender.data('action') || $sender.attr('action');
         var formData;
@@ -40,6 +41,13 @@ var Core = (function() {
         // csrf protection
         if (csrf) {
             formData.append(csrf['token'], csrf['hash']);
+        }
+        
+        // additional data
+        if (additionalData) {
+            for (var key in additionalData) {
+                formData.append(key, additionalData[key]);
+            }
         }
         
         $.ajax({

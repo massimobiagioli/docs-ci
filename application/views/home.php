@@ -151,7 +151,7 @@ $csrf = [
                 </div>
             </div>
         </div>        
-    </div> 
+    </div> <!-- #home_dlg_document_info -->
 
     <!-- DIALOG: DOCUMENT DELETE -->
     <div class="modal fade home-dialog" id="home_dlg_document_delete" tabindex="-1" role="dialog" aria-labelledby="home_dlg_document_delete_title" aria-hidden="true">
@@ -166,10 +166,16 @@ $csrf = [
                 <div class="modal-body" id="home_dlg_document_delete_body"></div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo $this->lang->line("cancel"); ?></button>
-                    <button type="button" class="btn btn-primary"><?php echo $this->lang->line("confirm"); ?></button>
+                    <button type="button" class="btn btn-primary" 
+                            id="home_dlg_document_confirm_delete" 
+                            data-action="<?php echo site_url('home/confirm_delete_document'); ?>"
+                            data-update="home_search_results home_error_messages home_result"
+                            data-dismiss="modal">
+                                <?php echo $this->lang->line("confirm"); ?>
+                    </button>
                 </div>
             </div>
         </div>        
-    </div> 
+    </div> <!-- #home_dlg_document_delete -->
 
 </div> <!-- .content-wrapper -->

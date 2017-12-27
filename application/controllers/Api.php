@@ -11,6 +11,7 @@ class Api extends CI_Controller {
         'delete_index' => 'delete',
         'index_document' => 'post',
         'count_documents' => 'get',
+        'get_document' => 'get',
         'search_documents' => 'get'
     ];
     
@@ -70,6 +71,20 @@ class Api extends CI_Controller {
         ];
         // Invoke doc service
         $this->doc_service->count_documents($search_info);
+        if ($this->doc_service->get_status() == ERROR_NONE) {
+            $this->handle_result($this->doc_service->get_message(), $this->doc_service->get_result());
+        } else {
+            if ($this->doc_service->get_status() === ERROR_AUTH) {
+                $this->handle_unauthorized();
+            } else {
+                $this->handle_error($this->doc_service->get_message(), $this->doc_service->get_native_status());
+            }
+        }
+    }
+    
+    private function get_document() {        
+        // Invoke doc service
+        $this->doc_service->get_document($this->input->get('id'));
         if ($this->doc_service->get_status() == ERROR_NONE) {
             $this->handle_result($this->doc_service->get_message(), $this->doc_service->get_result());
         } else {

@@ -217,6 +217,47 @@ class Doc_service {
     }
     
     /**
+     * Get document
+     * @param $id Document Id
+     */
+    public function get_document($id) {
+        $this->reset_status();
+
+        try {
+            // Check auth
+            $user = $this->CI->auth->get_user();
+            if (!$user) {
+                $msg = $this->CI->lang->line('unauthorized');
+                $this->set_status(ERROR_AUTH, $msg);
+                log_message('error', $msg);
+                return;
+            }
+            
+            // Invoke DMS
+            $dms = get_dms();
+            $result = $dms->get_document($user['user_login'], $id);
+            if (!$result) {
+                $msg = $this->CI->lang->line('error_get_document');
+                $this->set_status(ERROR_DMS, $msg, null, [
+                    'error_code' => $dms->last_error_code(),
+                    'error_description' => $dms->last_error_description()
+                ]);
+                log_message('error', $msg . ' (' . $dms->last_error_code() . ' - ' . $dms->last_error_description() . ')');
+                return;
+            }
+
+            // Handle result
+            $this->set_status(ERROR_NONE, '', $result);
+            log_message('info', json_encode($result));    
+        } catch (Exception $e) {
+            $this->set_status(ERROR_UNHANDLED, $e->getCode() . ' - ' . $e->getMessage());
+            $msg = $e->getCode() . ' - ' . $e->getMessage();
+            $this->set_status(ERROR_UNHANDLED, $msg);
+            log_message('error', $msg);
+        }        
+    }
+    
+    /**
      * Search documents
      * @param string $search_info Search info
      */
