@@ -41,6 +41,14 @@ interface Dms {
     public function get_document($index, $id);
     
     /**
+     * Delete document
+     * @param string $index Index   
+     * @param string $id Document Id
+     * @return array Result
+     */
+    public function delete_document($index, $id);
+    
+    /**
      * Search documents
      * @param string $index Index   
      * @param array $search_info Search info

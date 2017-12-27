@@ -16,6 +16,7 @@ $lang['error_delete_index'] = 'Errore cancellazione indice';
 
 // Home
 $lang['error_count_documents'] = 'Errore conteggio documenti';
+$lang['error_delete_document'] = 'Errore cancellazione documento';
 $lang['error_get_document'] = 'Errore lettura documento';
 $lang['error_getting_url_document'] = 'Errore lettura indirizzo documento';
 $lang['error_index_document'] = 'Errore indicizzazione documento';

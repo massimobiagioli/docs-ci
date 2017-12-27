@@ -108,6 +108,19 @@ class Dms_elastic extends Dms_super implements Dms {
         }
     }
     
+    public function delete_document($index, $id) {
+        try {
+            $params = [
+                'index' => $index,
+                'type' => self::DOCUMENT_TYPE,
+                'id' => $id
+            ];            
+            return $this->client->delete($params);
+        } catch (Exception $e) {
+            $this->set_error($e->getCode(), $e->getMessage());
+        }
+    }
+    
     public function search_documents($index, $search_info) {
         try {
             $criteria = $this->build_search_criteria($index, $search_info['free_search']);
@@ -163,6 +176,6 @@ class Dms_elastic extends Dms_super implements Dms {
             $criteria['body']['_source'] = ['document_*', 'attachment.content_type'];
         }
         return $criteria;
-    }   
+    }    
 
 }
