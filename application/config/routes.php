@@ -63,4 +63,5 @@ $route['api/delete_index']['delete'] = 'api/rest_router/delete_index';
 $route['api/index_document']['post'] = 'api/rest_router/index_document';
 $route['api/count_documents']['get'] = 'api/rest_router/count_documents';
 $route['api/get_document']['get'] = 'api/rest_router/get_document';
+$route['api/delete_document']['delete'] = 'api/rest_router/delete_document';
 $route['api/search_documents']['get'] = 'api/rest_router/search_documents';
