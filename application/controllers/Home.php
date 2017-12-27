@@ -128,13 +128,17 @@ class Home extends CI_Controller {
 
         // Loop over results
         $datatable_results['data'] = [];
+        $csrf_token_name = $this->security->get_csrf_token_name();
+        $csrf_hash = $this->security->get_csrf_hash();
         foreach ($results['hits']['hits'] as $result) {
             $datatable_results['data'][] = [
                 $result['_source']['document_info']['original_filename'],
                 $result['_source']['document_info']['created'],
                 '<div class="text-center">' .
                     '<a class="ml-3" href="#" data-action="' . site_url('home/prepare_document_info_dialog/' . $result['_id']) . '"' .
-                        ' data-update="home_dlg_document_info"' .
+                        ' data-update="home_dlg_document_info_body"' .
+                        ' data-csrftokenname="' . $csrf_token_name . '"' .
+                        ' data-csrfhash="' . $csrf_hash . '"' .
                         ' data-toggle="modal" data-target="#home_dlg_document_info"><i class="fa fa-info"></i>' .
                     '</a>' .
                     '<a class="ml-3" href="home/get_document_url?file_handle=' .
@@ -142,7 +146,9 @@ class Home extends CI_Controller {
                         '" target="_blank"><i class="fa fa-cloud-download"></i>' .
                     '</a>' .
                     '<a class="ml-3" href="#" data-action="' . site_url('home/prepare_document_info_dialog/' . $result['_id']) . '"' .
-                        ' data-update="home_dlg_document_delete"' .
+                        ' data-update="home_dlg_document_delete_body"' .
+                        ' data-csrftokenname="' . $csrf_token_name . '"' .
+                        ' data-csrfhash="' . $csrf_hash . '"' .                
                         ' data-toggle="modal" data-target="#home_dlg_document_delete"><i class="fa fa-trash"></i>' .
                     '</a>' .
                 '</div>'

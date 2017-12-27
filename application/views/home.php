@@ -136,9 +136,40 @@ $csrf = [
     </div>
 
     <!-- DIALOG: DOCUMENT INFO -->
-    <div class="modal fade home-dialog" id="home_dlg_document_info" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true"></div> 
-    
-    <!-- DIALOG: DELETE DOCUMENT -->
-    <div class="modal fade home-dialog" id="home_dlg_document_delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true"></div> 
+    <div class="modal fade home-dialog" id="home_dlg_document_info" tabindex="-1" role="dialog" aria-labelledby="home_dlg_document_info_title" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="home_dlg_document_info_title"><?php echo $this->lang->line("document_info"); ?></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="home_dlg_document_info_body"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo $this->lang->line("close"); ?></button>
+                </div>
+            </div>
+        </div>        
+    </div> 
+
+    <!-- DIALOG: DOCUMENT DELETE -->
+    <div class="modal fade home-dialog" id="home_dlg_document_delete" tabindex="-1" role="dialog" aria-labelledby="home_dlg_document_delete_title" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="home_dlg_document_delete_title"><?php echo $this->lang->line("delete_document"); ?></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="home_dlg_document_delete_body"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo $this->lang->line("cancel"); ?></button>
+                    <button type="button" class="btn btn-primary"><?php echo $this->lang->line("confirm"); ?></button>
+                </div>
+            </div>
+        </div>        
+    </div> 
 
 </div> <!-- .content-wrapper -->

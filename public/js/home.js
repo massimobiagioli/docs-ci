@@ -29,8 +29,12 @@ $(function () {
     
     // Document dialog
     $('.home-dialog').on('show.bs.modal', function(evt) {
-        evt.preventDefault();
-        Core.sendRequest(evt.relatedTarget);
+        var $relatedTarget = $(evt.relatedTarget);
+        var csrf = {
+            'token': $relatedTarget.data('csrftokenname'),
+            'hash': $relatedTarget.data('csrfhash')
+        };        
+        Core.sendRequest(evt.relatedTarget, csrf);
     });
     
 });

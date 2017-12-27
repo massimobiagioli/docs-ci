@@ -1,0 +1,19 @@
+<span>Metadati documenti:</span>
+<table>
+    <thead>
+        <tr>
+            <th>Chiave</th>
+            <th>Valore</th>            
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Cod</td>
+            <td>123</td>            
+        </tr>
+        <tr>
+            <td>Des</td>
+            <td>asdf123</td>            
+        </tr>
+    </tbody>
+</table>
