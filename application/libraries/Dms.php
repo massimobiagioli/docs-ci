@@ -11,7 +11,9 @@ interface Dms {
      * Create new index
      * @param string $index_name Index name
      * @return array Operation info
-     * @return array Results
+     * @return array Result
+     *      - status (0/1)
+     *      - native_result (array)
      */
     public function create_index($index_name);
     
@@ -19,7 +21,9 @@ interface Dms {
      * Delete index
      * @param string $index_name Index name
      * @return array Operation info
-     * @return array Results
+     * @return array Result
+     *      - status (0/1)
+     *      - native_result (array)
      */
     public function delete_index($index_name);
     
@@ -28,7 +32,10 @@ interface Dms {
      * @param string $index Index   
      * @param array $metadata Metadata
      * @param string $id Document Id (if null, automatically use a uuid)
-     * @return array Results
+     * @return array Result
+     *      - status (0/1)
+     *      - id
+     *      - native_result (array)
      */
     public function index_document($index, $metadata, $id = null);
     
@@ -36,7 +43,11 @@ interface Dms {
      * Get document
      * @param string $index Index   
      * @param string $id Document Id
-     * @return array Document
+     * @return array Result
+     *      - status (0/1)
+     *      - id
+     *      - document
+     *      - native_result (array)
      */
     public function get_document($index, $id);
     
@@ -45,6 +56,9 @@ interface Dms {
      * @param string $index Index   
      * @param string $id Document Id
      * @return array Result
+     *      - status (0/1)
+     *      - id
+     *      - native_result (array)
      */
     public function delete_document($index, $id);
     

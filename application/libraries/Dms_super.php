@@ -23,7 +23,7 @@ abstract class Dms_super {
         $this->last_error_code = $error_code;
         $this->last_error_description = $error_description;
     }
-    
+        
     public function last_error_code() {
         return $this->last_error_code;
     }

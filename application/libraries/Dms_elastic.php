@@ -40,7 +40,7 @@ class Dms_elastic extends Dms_super implements Dms {
 
     public function create_index($index_name) {
         try {
-            return $this->client->indices()->create([
+            $response = $this->client->indices()->create([
                 'index' => $index_name,
                 'body' => [
                     'mappings' => [
@@ -58,21 +58,37 @@ class Dms_elastic extends Dms_super implements Dms {
                     ]
                 ]
             ]);
+            return $this->adapt_response_create_index($response);
         } catch (Exception $e) {
             $this->set_error($e->getCode(), $e->getMessage());
         }
     }
-
+    
+    private function adapt_response_create_index($toAdapt) {
+        return [
+            'status' => $toAdapt['acknowledged'] ? 1 : 0,
+            'native_result' => $toAdapt
+        ];                
+    }
+    
     public function delete_index($index_name) {
         try {
-            return $this->client->indices()->delete([
+            $response = $this->client->indices()->delete([
                 'index' => $index_name
             ]);
+            return $this->adapt_response_delete_index($response);
         } catch (Exception $e) {
             $this->set_error($e->getCode(), $e->getMessage());
         }
     }
-
+    
+    private function adapt_response_delete_index($toAdapt) {
+        return [
+            'status' => $toAdapt['acknowledged'] ? 1 : 0,
+            'native_result' => $toAdapt
+        ];        
+    }
+    
     public function index_document($index, $metadata, $id = null) {
         try {
             $params = [];
@@ -89,10 +105,19 @@ class Dms_elastic extends Dms_super implements Dms {
             // Ingest pipeline
             $params['pipeline'] = 'attachment';
 
-            return $this->client->index($params);
+            $response = $this->client->index($params);
+            return $this->adapt_response_index_document($response);
         } catch (Exception $e) {
             $this->set_error($e->getCode(), $e->getMessage());
         }
+    }
+    
+    private function adapt_response_index_document($toAdapt) {
+        return [
+            'status' => strtolower($toAdapt['result']) === 'created' ? 1 : 0,
+            'id' => $toAdapt['_id'],
+            'native_result' => $toAdapt
+        ];        
     }
     
     public function get_document($index, $id) {
@@ -102,10 +127,20 @@ class Dms_elastic extends Dms_super implements Dms {
                 'type' => self::DOCUMENT_TYPE,
                 'id' => $id
             ];            
-            return $this->client->get($params);
+            $response = $this->client->get($params);
+            return $this->adapt_response_get_document($response);
         } catch (Exception $e) {
             $this->set_error($e->getCode(), $e->getMessage());
         }
+    }
+    
+    private function adapt_response_get_document($toAdapt) {
+        return [
+            'status' => $toAdapt['found'] ? 1 : 0,
+            'id' => $toAdapt['_id'],
+            'doc' => $toAdapt['_source'],
+            'native_result' => $toAdapt
+        ];        
     }
     
     public function delete_document($index, $id) {
@@ -115,10 +150,19 @@ class Dms_elastic extends Dms_super implements Dms {
                 'type' => self::DOCUMENT_TYPE,
                 'id' => $id
             ];            
-            return $this->client->delete($params);
+            $response = $this->client->delete($params);
+            return $this->adapt_response_delete_document($response);
         } catch (Exception $e) {
             $this->set_error($e->getCode(), $e->getMessage());
         }
+    }
+    
+    private function adapt_response_delete_document($toAdapt) {
+        return [
+            'status' => strtolower($toAdapt['result']) === 'deleted' ? 1 : 0,
+            'id' => $toAdapt['_id'],
+            'native_result' => $toAdapt
+        ];        
     }
     
     public function search_documents($index, $search_info) {
