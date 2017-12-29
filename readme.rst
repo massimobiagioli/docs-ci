@@ -127,3 +127,11 @@ Delete Document
     - **status**: 1 = OK, 0 = Error
     - **id**: Document deleted ID
     - **native_result**: Raw result sent by registered DMS
+
+
+Greetings
+===============
+- `Codeigniter <https://codeigniter.com/>`_
+- `ElasticSearch <https://www.elastic.co/>`_
+- `FileStack <https://www.filestack.com/>`_
+- `Heroku <https://www.heroku.com>`_
