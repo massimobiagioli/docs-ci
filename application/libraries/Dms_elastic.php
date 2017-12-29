@@ -135,10 +135,11 @@ class Dms_elastic extends Dms_super implements Dms {
     }
     
     private function adapt_response_get_document($toAdapt) {
+        $doc = $toAdapt['_source'];
+        $doc['id'] = $toAdapt['_id'];
         return [
             'status' => $toAdapt['found'] ? 1 : 0,
-            'id' => $toAdapt['_id'],
-            'doc' => $toAdapt['_source'],
+            'doc' => $doc,
             'native_result' => $toAdapt
         ];        
     }
@@ -184,12 +185,27 @@ class Dms_elastic extends Dms_super implements Dms {
                 ];
             }
             
-            return $this->client->search($criteria);
+            $response = $this->client->search($criteria);
+            return $this->adapt_response_search_documents($response);
         } catch (Exception $e) {
             $this->set_error($e->getCode(), $e->getMessage());
         }
     }
-
+    
+    private function adapt_response_search_documents($toAdapt) {
+        $docs = [];
+        foreach ($toAdapt['hits']['hits'] as $hit) {
+            $doc = $hit['_source'];
+            $doc['id'] = $hit['_id'];
+            $docs[] = $doc;
+        }
+        return [
+            'count' => $toAdapt['hits']['total'],
+            'docs' => $docs,
+            'native_result' => $toAdapt
+        ];        
+    }
+    
     public function count_documents($index, $search_info) {
         try {
             return $this->client->count($this->build_search_criteria($index, $search_info['free_search'], false));

@@ -45,8 +45,7 @@ interface Dms {
      * @param string $id Document Id
      * @return array Result
      *      - status (0/1)
-     *      - id
-     *      - document
+     *      - doc
      *      - native_result (array)
      */
     public function get_document($index, $id);
@@ -66,7 +65,10 @@ interface Dms {
      * Search documents
      * @param string $index Index   
      * @param array $search_info Search info
-     * @return array Documents
+     * @return array Result
+     *      - count
+     *      - docs
+     *      - native_result (array)
      */
     public function search_documents($index, $search_info);
     
