@@ -1,5 +1,4 @@
 <?php
-
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 use Ramsey\Uuid\Uuid;
@@ -50,6 +49,10 @@ class Doc_service {
             
             // Invoke dms
             $dms = get_dms();
+            if (!$dms) {
+                $this->set_status(ERROR_PRECONDITION, $this->CI->lang->line('error_create_dms_object'));
+                return;
+            }
             $result = $dms->create_index($index_name);
             if (!$result) {
                 $msg = $this->CI->lang->line('error_create_index') . ':' . $index_name;
@@ -102,6 +105,10 @@ class Doc_service {
             
             // Invoke dms
             $dms = get_dms();
+            if (!$dms) {
+                $this->set_status(ERROR_PRECONDITION, $this->CI->lang->line('error_create_dms_object'));
+                return;
+            }
             $result = $dms->delete_index($index_name);
             if (!$result) {
                 $msg = $this->CI->lang->line('error_delete_index') . ':' . $index_name;
@@ -153,6 +160,10 @@ class Doc_service {
 
             // Invoke storage
             $storage = get_storage();
+            if (!$storage) {
+                $this->set_status(ERROR_PRECONDITION, $this->CI->lang->line('error_create_dms_storage'));
+                return;
+            }
             $uuid4 = Uuid::uuid4();
             $filename = $uuid4->getHex();
             $result = $storage->upload($file_to_upload['tmp_name'], $filename);
@@ -193,6 +204,10 @@ class Doc_service {
 
             // Invoke DMS
             $dms = get_dms();
+            if (!$dms) {
+                $this->set_status(ERROR_PRECONDITION, $this->CI->lang->line('error_create_dms_object'));
+                return;
+            }
             $result = $dms->index_document($user['user_login'], $metadata);
             if (!$result) {
                 $msg = $this->CI->lang->line('error_index_document');
@@ -235,6 +250,10 @@ class Doc_service {
             
             // Invoke DMS
             $dms = get_dms();
+            if (!$dms) {
+                $this->set_status(ERROR_PRECONDITION, $this->CI->lang->line('error_create_dms_object'));
+                return;
+            }
             $result = $dms->get_document($user['user_login'], $id);
             if (!$result) {
                 $msg = $this->CI->lang->line('error_get_document');
@@ -276,6 +295,10 @@ class Doc_service {
             
             // Invoke DMS
             $dms = get_dms();
+            if (!$dms) {
+                $this->set_status(ERROR_PRECONDITION, $this->CI->lang->line('error_create_dms_object'));
+                return;
+            }
             $result = $dms->delete_document($user['user_login'], $id);
             if (!$result) {
                 $msg = $this->CI->lang->line('error_delete_document');
@@ -317,6 +340,10 @@ class Doc_service {
             
             // Invoke DMS
             $dms = get_dms();
+            if (!$dms) {
+                $this->set_status(ERROR_PRECONDITION, $this->CI->lang->line('error_create_dms_object'));
+                return;
+            }
             $result = $dms->search_documents($user['user_login'], $search_info);
             if (!$result) {
                 $msg = $this->CI->lang->line('error_search_documents');
@@ -358,6 +385,10 @@ class Doc_service {
             
             // Invoke DMS
             $dms = get_dms();
+            if (!$dms) {
+                $this->set_status(ERROR_PRECONDITION, $this->CI->lang->line('error_create_dms_object'));
+                return;
+            }
             $result = $dms->count_documents($user['user_login'], $search_info);
             if (!$result) {
                 $msg = $this->CI->lang->line('error_count_documents');
@@ -407,6 +438,10 @@ class Doc_service {
 
             // Invoke storage
             $storage = get_storage();
+            if (!$storage) {
+                $this->set_status(ERROR_PRECONDITION, $this->CI->lang->line('error_create_storage_object'));
+                return;
+            }
             $document_url = $storage->get_file_url($storage_filehandle);
             if (!$document_url) {
                 $msg = $this->CI->lang->line('error_getting_url_document');

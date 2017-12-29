@@ -76,7 +76,7 @@ interface Dms {
      * Count documents
      * @param string $index Index   
      * @param array $search_info Search info
-     * @return array Results
+     * @return int Count
      */
     public function count_documents($index, $search_info);
     
