@@ -220,7 +220,7 @@ class Doc_service {
             }
 
             // Handle result
-            $msg = $this->CI->lang->line('document_indexed_successfully');
+            $msg = $this->CI->lang->line('document_indexed') . ':' . $result['id'];
             $this->set_status(ERROR_NONE, $msg, $result);
             log_message('info', $msg . ' (' . json_encode($result) . ')');    
         } catch (Exception $e) {
@@ -311,7 +311,8 @@ class Doc_service {
             }
 
             // Handle result
-            $this->set_status(ERROR_NONE, '', $result);
+            $msg = $this->CI->lang->line('document_deleted') . ':' . $id;
+            $this->set_status(ERROR_NONE, $msg, $result);
             log_message('info', json_encode($result));    
         } catch (Exception $e) {
             $this->set_status(ERROR_UNHANDLED, $e->getCode() . ' - ' . $e->getMessage());
