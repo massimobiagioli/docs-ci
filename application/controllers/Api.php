@@ -12,6 +12,7 @@ class Api extends CI_Controller {
         'index_document' => 'post',
         'count_documents' => 'get',
         'get_document' => 'get',
+        'get_document_url' => 'get',
         'delete_document' => 'delete',
         'search_documents' => 'get'
     ];
@@ -86,6 +87,20 @@ class Api extends CI_Controller {
     private function get_document() {        
         // Invoke doc service
         $this->doc_service->get_document($this->input->get('id'));
+        if ($this->doc_service->get_status() == ERROR_NONE) {
+            $this->handle_result($this->doc_service->get_message(), $this->doc_service->get_result());
+        } else {
+            if ($this->doc_service->get_status() === ERROR_AUTH) {
+                $this->handle_unauthorized();
+            } else {
+                $this->handle_error($this->doc_service->get_message(), $this->doc_service->get_native_status());
+            }
+        }
+    }
+    
+    private function get_document_url() {        
+        // Invoke doc service
+        $this->doc_service->get_document_url($this->input->get('file_handle'));
         if ($this->doc_service->get_status() == ERROR_NONE) {
             $this->handle_result($this->doc_service->get_message(), $this->doc_service->get_result());
         } else {

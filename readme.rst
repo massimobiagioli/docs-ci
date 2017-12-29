@@ -110,6 +110,19 @@ Get Document
     - **doc**: Document
     - **native_result**: Raw result sent by registered DMS
 
+Get Document URL
+------------------
+:Purpose: Get a specific document URL in the Storage System
+:Role: User
+:Url: <app_url>/api/get_document_url
+:Verb: GET
+:Params: 
+ - **file_handle**: Storage file handle
+:Response:
+ - type: application/json
+ - **message**: Message that describes operation
+ - **result**: Document URL
+
 Delete Document
 ------------------
 :Purpose: Delete a specific document in the Document Management System
