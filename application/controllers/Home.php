@@ -49,10 +49,7 @@ class Home extends CI_Controller {
 
     public function index_document() {
         
-        $this->output
-                ->set_content_type('application/json')
-                ->set_status_header(200)
-                ->set_output(json_encode($_FILES));
+        $this->handle_result(json_encode($_FILES), $_FILES);
         
 //        $this->doc_service->index_document($_FILES['file_to_upload'], $this->input->post());
 //        if ($this->doc_service->get_status() == ERROR_NONE) {
