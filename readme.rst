@@ -60,11 +60,11 @@ Index Document
     - **status**: 1 = OK, 0 = Error
     - **id**: Indexed document ID
     - **native_result**: Raw result sent by registered DMS
-				
+
 Count Documents
 ------------------
 :Purpose: Count documents in the Document Management System
-:Role: Administrator
+:Role: User
 :Url: <app_url>/api/count_documents
 :Verb: GET
 :Params: 
@@ -73,3 +73,19 @@ Count Documents
  - type: application/json
  - **message**: Message that describes operation
  - **result**: Count
+
+Search Documents
+------------------
+:Purpose: Search documents in the Document Management System
+:Role: User
+:Url: <app_url>/api/count_documents
+:Verb: GET
+:Params: 
+ - **free_search**: Free text search
+:Response:
+ - type: application/json
+ - **message**: Message that describes operation
+ - **result**:
+    - **status**: 1 = OK, 0 = Error
+    - **docs**: Documents
+    - **native_result**: Raw result sent by registered DMS
