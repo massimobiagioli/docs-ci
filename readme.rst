@@ -105,3 +105,21 @@ Get Document
     - **status**: 1 = OK, 0 = Error
     - **doc**: Document
     - **native_result**: Raw result sent by registered DMS
+
+Delete Document
+------------------
+:Purpose: Delete a specific document in the Document Management System
+:Role: User
+:Url: <app_url>/api/delete_document
+:Verb: DELETE
+:Body: 
+ - type: x-www-form-urlencoded   
+ - Params: 
+    - **id**: Document ID
+:Response:
+ - type: application/json
+ - **message**: Message that describes operation
+ - **result**:
+    - **status**: 1 = OK, 0 = Error
+    - **id**: Document deleted ID
+    - **native_result**: Raw result sent by registered DMS
