@@ -48,19 +48,16 @@ class Home extends CI_Controller {
     }
 
     public function index_document() {
-        
-        $this->handle_result(json_encode($_FILES), $_FILES);
-        
-//        $this->doc_service->index_document($_FILES['file_to_upload'], $this->input->post());
-//        if ($this->doc_service->get_status() == ERROR_NONE) {
-//            $this->handle_result($this->doc_service->get_message(), $this->doc_service->get_result());
-//        } else {
-//            if ($this->doc_service->get_status() === ERROR_AUTH) {
-//                $this->handle_unauthorized();
-//            } else {
-//                $this->handle_error($this->doc_service->get_message(), $this->doc_service->get_native_status());
-//            }
-//        }
+        $this->doc_service->index_document($_FILES['file_to_upload'], $this->input->post());
+        if ($this->doc_service->get_status() == ERROR_NONE) {
+            $this->handle_result($this->doc_service->get_message(), $this->doc_service->get_result());
+        } else {
+            if ($this->doc_service->get_status() === ERROR_AUTH) {
+                $this->handle_unauthorized();
+            } else {
+                $this->handle_error($this->doc_service->get_message(), $this->doc_service->get_native_status());
+            }
+        }
     }
 
     public function prepare_search_documents($flush_xml_response = true) {
