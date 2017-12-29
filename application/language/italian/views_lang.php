@@ -22,6 +22,7 @@ $lang['migrations'] = 'Migrations';
 $lang['migrations_executed'] = 'Migrations eseguite';
 
 // Home
+$lang['attachment'] = 'Allegato';
 $lang['browse'] = 'Sfoglia ...';
 $lang['cancel'] = 'Annulla';
 $lang['close'] = 'Chiudi';

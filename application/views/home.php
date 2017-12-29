@@ -137,7 +137,7 @@ $csrf = [
 
     <!-- DIALOG: DOCUMENT INFO -->
     <div class="modal fade home-dialog" id="home_dlg_document_info" tabindex="-1" role="dialog" aria-labelledby="home_dlg_document_info_title" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="home_dlg_document_info_title"><?php echo $this->lang->line("document_info"); ?></h5>

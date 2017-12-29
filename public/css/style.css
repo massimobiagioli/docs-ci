@@ -115,10 +115,13 @@ i#add_row_metadata,
     text-transform: uppercase;
     margin-bottom: 0;
 }
-.document-detail-info h4,
-.document-detail-metadata h4 {
+.document-detail-info h4 {
     text-align: center;
     font-weight: bold;
     text-transform: uppercase;
     font-size: 1.2em;
+}
+.document-detail-info-key {
+    text-align: right;
+    font-weight: bold;
 }
