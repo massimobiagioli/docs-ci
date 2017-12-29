@@ -78,7 +78,7 @@ Search Documents
 ------------------
 :Purpose: Search documents in the Document Management System
 :Role: User
-:Url: <app_url>/api/count_documents
+:Url: <app_url>/api/search_documents
 :Verb: GET
 :Params: 
  - **free_search**: Free text search
@@ -88,4 +88,20 @@ Search Documents
  - **result**:
     - **status**: 1 = OK, 0 = Error
     - **docs**: Documents
+    - **native_result**: Raw result sent by registered DMS
+
+Get Document
+------------------
+:Purpose: Get a specific document in the Document Management System
+:Role: User
+:Url: <app_url>/api/get_document
+:Verb: GET
+:Params: 
+ - **id**: Document id
+:Response:
+ - type: application/json
+ - **message**: Message that describes operation
+ - **result**:
+    - **status**: 1 = OK, 0 = Error
+    - **doc**: Document
     - **native_result**: Raw result sent by registered DMS
