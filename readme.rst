@@ -5,6 +5,10 @@ Docs
 API
 ===============
 
+Authorization
+------------------
+:Type: Basic
+
 Create Index
 ------------------
 :Purpose: Create a new index in the Document Management System
