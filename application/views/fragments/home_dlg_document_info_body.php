@@ -22,12 +22,12 @@
             <div class="container">
                 <div class="row">
                     <?php foreach ($document['document_info'] as $key => $value): ?>
-                    <div class="document-detail-info-key col-4">
-                        <?php echo $key; ?>
-                    </div>
-                    <div class="document-detail-info-value col-8">
-                        <?php echo $value; ?>
-                    </div>
+                        <div class="document-detail-info-key col-4">
+                            <?php echo $key; ?>
+                        </div>
+                        <div class="document-detail-info-value col-8">
+                            <?php echo $value; ?>
+                        </div>
                     <?php endforeach; ?>
                 </div>
             </div> <!-- .container -->
@@ -42,12 +42,12 @@
             <div class="container">
                 <div class="row">
                     <?php foreach ($document['document_metadata'] as $key => $value): ?>
-                    <div class="document-detail-info-key col-4">
-                        <?php echo $key; ?>
-                    </div>
-                    <div class="document-detail-info-value col-8">
-                        <?php echo $value; ?>
-                    </div>
+                        <div class="document-detail-info-key col-4">
+                            <?php echo $key; ?>
+                        </div>
+                        <div class="document-detail-info-value col-8">
+                            <?php echo $value; ?>
+                        </div>
                     <?php endforeach; ?>
                 </div>
             </div> <!-- .container -->
@@ -62,14 +62,16 @@
             <div class="container">
                 <div class="row">
                     <?php foreach ($document['attachment'] as $key => $value): ?>
-                    <div class="document-detail-info-key col-4">
-                        <?php echo $key; ?>
-                    </div>
-                    <div class="document-detail-info-value col-8">
-                        <?php if (strtolower($key) === 'content'): ?>
-                            TODO: gestire contenuto ...
-                        <?php else: echo $value; endif;?>
-                    </div>
+                        <div class="document-detail-info-key col-4">
+                            <?php echo $key; ?>
+                        </div>
+                        <div class="document-detail-info-value col-8">
+                            <?php if (strtolower($key) === 'content'): ?>
+                                <div class="document-detail-content">
+                                    <?php echo $value; ?>
+                                </div>
+                            <?php else: echo $value; endif;?>
+                        </div>
                     <?php endforeach; ?>
                 </div>
             </div> <!-- .container -->

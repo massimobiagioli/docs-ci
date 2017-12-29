@@ -125,3 +125,8 @@ i#add_row_metadata,
     text-align: right;
     font-weight: bold;
 }
+.document-detail-content {
+    height: 60px;
+    font-size: .8em;
+    overflow-y: auto;
+}

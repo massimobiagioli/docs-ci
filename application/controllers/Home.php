@@ -60,7 +60,7 @@ class Home extends CI_Controller {
         }
     }
 
-    public function prepare_search_documents() {
+    public function prepare_search_documents($flush_xml_response = true) {
         // Clear session data
         $this->session->unset_userdata('total_results');
         
@@ -74,7 +74,9 @@ class Home extends CI_Controller {
             'page_length' => DATATABLE_DEFAULT_PAGELEN
         ];
         $this->core_client->set_fragment_data('home_search_results', $params, 'renderDataTable', 'search_results_datatable');
-        $this->core_client->xmlResponse();
+        if ($flush_xml_response) {
+            $this->core_client->xmlResponse();
+        }
     }
 
     public function search_documents() {
@@ -131,7 +133,12 @@ class Home extends CI_Controller {
         $csrf_hash = $this->security->get_csrf_hash();
         foreach ($results['docs'] as $result) {
             $datatable_results['data'][] = [
-                $result['document_info']['original_filename'],
+                '<a class="ml-3" href="#" data-action="' . site_url('home/prepare_document_info_dialog/' . $result['id']) . '"' .
+                    ' data-update="home_dlg_document_info_body"' .
+                    ' data-csrftokenname="' . $csrf_token_name . '"' .
+                    ' data-csrfhash="' . $csrf_hash . '"' .
+                    ' data-toggle="modal" data-target="#home_dlg_document_info">' . $result['document_info']['original_filename'] .
+                '</a>',
                 $result['document_info']['created'],
                 '<div class="text-center">' .
                     '<a class="ml-3" href="#" data-action="' . site_url('home/prepare_document_info_dialog/' . $result['id']) . '"' .
@@ -209,6 +216,7 @@ class Home extends CI_Controller {
     public function confirm_delete_document() {
         $this->doc_service->delete_document($this->input->post('docid'));
         if ($this->doc_service->get_status() == ERROR_NONE) {
+            $this->prepare_search_documents(false);
             $this->handle_result($this->doc_service->get_message(), $this->doc_service->get_result());
         } else {
             if ($this->doc_service->get_status() === ERROR_AUTH) {
