@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="CodeIgniter Application Test Suite" tests="1" assertions="1" errors="0" failures="0" skipped="0" time="0.279253">
-    <testsuite name="Login_test" file="/home/vagrant/Code/docs/application/tests/controllers/Login_test.php" tests="1" assertions="1" errors="0" failures="0" skipped="0" time="0.279253">
-      <testcase name="test_index" class="Login_test" classname="Login_test" file="/home/vagrant/Code/docs/application/tests/controllers/Login_test.php" line="5" assertions="1" time="0.279253"/>
+  <testsuite name="CodeIgniter Application Test Suite" tests="4" assertions="5" errors="0" failures="0" skipped="0" time="0.513760">
+    <testsuite name="Home_test" file="/home/vagrant/Code/docs/application/tests/controllers/Home_test.php" tests="1" assertions="2" errors="0" failures="0" skipped="0" time="0.210165">
+      <testcase name="test_index_redirect" class="Home_test" classname="Home_test" file="/home/vagrant/Code/docs/application/tests/controllers/Home_test.php" line="5" assertions="2" time="0.210165"/>
+    </testsuite>
+    <testsuite name="Login_test" file="/home/vagrant/Code/docs/application/tests/controllers/Login_test.php" tests="1" assertions="1" errors="0" failures="0" skipped="0" time="0.114861">
+      <testcase name="test_index" class="Login_test" classname="Login_test" file="/home/vagrant/Code/docs/application/tests/controllers/Login_test.php" line="5" assertions="1" time="0.114861"/>
+    </testsuite>
+    <testsuite name="User_model_test" file="/home/vagrant/Code/docs/application/tests/models/User_model_test.php" tests="2" assertions="2" errors="0" failures="0" skipped="0" time="0.188734">
+      <testcase name="test_check_preload_user_sysadmin" class="User_model_test" classname="User_model_test" file="/home/vagrant/Code/docs/application/tests/models/User_model_test.php" line="11" assertions="1" time="0.107481"/>
+      <testcase name="test_check_preload_user_user01" class="User_model_test" classname="User_model_test" file="/home/vagrant/Code/docs/application/tests/models/User_model_test.php" line="19" assertions="1" time="0.081253"/>
     </testsuite>
   </testsuite>
 </testsuites>
