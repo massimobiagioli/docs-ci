@@ -1,6 +1,6 @@
 <?php
 
-class Home_test extends TestCase {
+class Home_controller_test extends TestCase {
 
     public function test_index_redirect() {
         $this->request('GET', 'home/index');
