@@ -52,6 +52,7 @@ class Core_client {
      *              Message prototype:
      *              - type => Message type
      *                          - console
+     *                          - location
      *              - metadata => Message metadata
      *                              - console:
      *                                  - level (log, warn, error)

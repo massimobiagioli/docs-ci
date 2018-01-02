@@ -1,24 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="CodeIgniter Application Test Suite" tests="11" assertions="12" errors="0" failures="0" skipped="0" time="1.002266">
-    <testsuite name="Home_controller_test" file="/home/vagrant/Code/docs/application/tests/controllers/Home_controller_test.php" tests="1" assertions="2" errors="0" failures="0" skipped="0" time="0.175920">
-      <testcase name="test_index_redirect" class="Home_controller_test" classname="Home_controller_test" file="/home/vagrant/Code/docs/application/tests/controllers/Home_controller_test.php" line="5" assertions="2" time="0.175920"/>
+  <testsuite name="CodeIgniter Application Test Suite" tests="15" assertions="21" errors="0" failures="0" skipped="0" time="0.690492">
+    <testsuite name="Home_controller_test" file="/home/vagrant/Code/docs-ci/application/tests/controllers/Home_controller_test.php" tests="1" assertions="2" errors="0" failures="0" skipped="0" time="0.081901">
+      <testcase name="test_index_redirect" class="Home_controller_test" classname="Home_controller_test" file="/home/vagrant/Code/docs-ci/application/tests/controllers/Home_controller_test.php" line="5" assertions="2" time="0.081901"/>
     </testsuite>
-    <testsuite name="Login_controller_test" file="/home/vagrant/Code/docs/application/tests/controllers/Login_controller_test.php" tests="1" assertions="1" errors="0" failures="0" skipped="0" time="0.110068">
-      <testcase name="test_index" class="Login_controller_test" classname="Login_controller_test" file="/home/vagrant/Code/docs/application/tests/controllers/Login_controller_test.php" line="5" assertions="1" time="0.110068"/>
+    <testsuite name="Login_controller_test" file="/home/vagrant/Code/docs-ci/application/tests/controllers/Login_controller_test.php" tests="1" assertions="1" errors="0" failures="0" skipped="0" time="0.049490">
+      <testcase name="test_index" class="Login_controller_test" classname="Login_controller_test" file="/home/vagrant/Code/docs-ci/application/tests/controllers/Login_controller_test.php" line="5" assertions="1" time="0.049490"/>
     </testsuite>
-    <testsuite name="Auth_library_test" file="/home/vagrant/Code/docs/application/tests/libraries/Auth_library_test.php" tests="7" assertions="7" errors="0" failures="0" skipped="0" time="0.562238">
-      <testcase name="test_get_user_by_right_credential" class="Auth_library_test" classname="Auth_library_test" file="/home/vagrant/Code/docs/application/tests/libraries/Auth_library_test.php" line="20" assertions="1" time="0.091240"/>
-      <testcase name="test_get_user_by_wrong_credential" class="Auth_library_test" classname="Auth_library_test" file="/home/vagrant/Code/docs/application/tests/libraries/Auth_library_test.php" line="25" assertions="1" time="0.074998"/>
-      <testcase name="test_get_user_by_right_authorization_header" class="Auth_library_test" classname="Auth_library_test" file="/home/vagrant/Code/docs/application/tests/libraries/Auth_library_test.php" line="30" assertions="1" time="0.073617"/>
-      <testcase name="test_get_user_by_wrong_authorization_header" class="Auth_library_test" classname="Auth_library_test" file="/home/vagrant/Code/docs/application/tests/libraries/Auth_library_test.php" line="36" assertions="1" time="0.074753"/>
-      <testcase name="test_get_user_by_session" class="Auth_library_test" classname="Auth_library_test" file="/home/vagrant/Code/docs/application/tests/libraries/Auth_library_test.php" line="42" assertions="1" time="0.084510"/>
-      <testcase name="test_system_is_admin" class="Auth_library_test" classname="Auth_library_test" file="/home/vagrant/Code/docs/application/tests/libraries/Auth_library_test.php" line="57" assertions="1" time="0.076297"/>
-      <testcase name="test_user01_is_not_admin" class="Auth_library_test" classname="Auth_library_test" file="/home/vagrant/Code/docs/application/tests/libraries/Auth_library_test.php" line="62" assertions="1" time="0.086823"/>
+    <testsuite name="Auth_library_test" file="/home/vagrant/Code/docs-ci/application/tests/libraries/Auth_library_test.php" tests="7" assertions="7" errors="0" failures="0" skipped="0" time="0.312610">
+      <testcase name="test_get_user_by_right_credential" class="Auth_library_test" classname="Auth_library_test" file="/home/vagrant/Code/docs-ci/application/tests/libraries/Auth_library_test.php" line="20" assertions="1" time="0.055369"/>
+      <testcase name="test_get_user_by_wrong_credential" class="Auth_library_test" classname="Auth_library_test" file="/home/vagrant/Code/docs-ci/application/tests/libraries/Auth_library_test.php" line="25" assertions="1" time="0.038268"/>
+      <testcase name="test_get_user_by_right_authorization_header" class="Auth_library_test" classname="Auth_library_test" file="/home/vagrant/Code/docs-ci/application/tests/libraries/Auth_library_test.php" line="30" assertions="1" time="0.038594"/>
+      <testcase name="test_get_user_by_wrong_authorization_header" class="Auth_library_test" classname="Auth_library_test" file="/home/vagrant/Code/docs-ci/application/tests/libraries/Auth_library_test.php" line="36" assertions="1" time="0.050117"/>
+      <testcase name="test_get_user_by_session" class="Auth_library_test" classname="Auth_library_test" file="/home/vagrant/Code/docs-ci/application/tests/libraries/Auth_library_test.php" line="42" assertions="1" time="0.037945"/>
+      <testcase name="test_system_is_admin" class="Auth_library_test" classname="Auth_library_test" file="/home/vagrant/Code/docs-ci/application/tests/libraries/Auth_library_test.php" line="57" assertions="1" time="0.045866"/>
+      <testcase name="test_user01_is_not_admin" class="Auth_library_test" classname="Auth_library_test" file="/home/vagrant/Code/docs-ci/application/tests/libraries/Auth_library_test.php" line="62" assertions="1" time="0.046451"/>
     </testsuite>
-    <testsuite name="User_model_test" file="/home/vagrant/Code/docs/application/tests/models/User_model_test.php" tests="2" assertions="2" errors="0" failures="0" skipped="0" time="0.154040">
-      <testcase name="test_check_preload_user_sysadmin" class="User_model_test" classname="User_model_test" file="/home/vagrant/Code/docs/application/tests/models/User_model_test.php" line="11" assertions="1" time="0.087042"/>
-      <testcase name="test_check_preload_user_user01" class="User_model_test" classname="User_model_test" file="/home/vagrant/Code/docs/application/tests/models/User_model_test.php" line="19" assertions="1" time="0.066998"/>
+    <testsuite name="Core_client_library_test" file="/home/vagrant/Code/docs-ci/application/tests/libraries/Core_client_library_test.php" tests="4" assertions="9" errors="0" failures="0" skipped="0" time="0.164125">
+      <testcase name="test_empty_xml_response" class="Core_client_library_test" classname="Core_client_library_test" file="/home/vagrant/Code/docs-ci/application/tests/libraries/Core_client_library_test.php" line="12" assertions="2" time="0.042084"/>
+      <testcase name="test_xml_response_with_console_message" class="Core_client_library_test" classname="Core_client_library_test" file="/home/vagrant/Code/docs-ci/application/tests/libraries/Core_client_library_test.php" line="19" assertions="2" time="0.038770"/>
+      <testcase name="test_xml_response_with_location_message" class="Core_client_library_test" classname="Core_client_library_test" file="/home/vagrant/Code/docs-ci/application/tests/libraries/Core_client_library_test.php" line="32" assertions="2" time="0.042839"/>
+      <testcase name="test_xml_response_with_output_message" class="Core_client_library_test" classname="Core_client_library_test" file="/home/vagrant/Code/docs-ci/application/tests/libraries/Core_client_library_test.php" line="45" assertions="3" time="0.040432"/>
+    </testsuite>
+    <testsuite name="User_model_test" file="/home/vagrant/Code/docs-ci/application/tests/models/User_model_test.php" tests="2" assertions="2" errors="0" failures="0" skipped="0" time="0.082366">
+      <testcase name="test_check_preload_user_sysadmin" class="User_model_test" classname="User_model_test" file="/home/vagrant/Code/docs-ci/application/tests/models/User_model_test.php" line="11" assertions="1" time="0.040756"/>
+      <testcase name="test_check_preload_user_user01" class="User_model_test" classname="User_model_test" file="/home/vagrant/Code/docs-ci/application/tests/models/User_model_test.php" line="19" assertions="1" time="0.041610"/>
     </testsuite>
   </testsuite>
 </testsuites>
