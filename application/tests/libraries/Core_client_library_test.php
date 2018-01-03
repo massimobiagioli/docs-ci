@@ -58,4 +58,17 @@ class Core_client_library_test extends TestCase {
                 $this->CI->output->get_output());
     }
     
+    public function test_xml_response_with_output_message_and_post_update_action() {
+        $_POST['update'] = 'home_search_results';
+        $params = [
+            'url' => '/home/search_documents',
+            'page_length' => DATATABLE_DEFAULT_PAGELEN
+        ];
+        $this->client->set_fragment_data('home_search_results', $params, 'renderDataTable', 'search_results_datatable');
+        $this->client->xml_response();               
+        $this->assertEquals('application/xml', $this->CI->output->get_content_type());
+        $this->assertContains('<response><fragments><home_search_results post_update_action="renderDataTable" post_update_action_params="search_results_datatable">', 
+                $this->CI->output->get_output());                
+    }
+    
 }
