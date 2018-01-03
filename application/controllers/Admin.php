@@ -58,7 +58,7 @@ class Admin extends CI_Controller {
             }            
         }
         
-        $this->core_client->xmlResponse();
+        $this->core_client->xml_response();
     }
     
     public function create_index() {
@@ -93,11 +93,11 @@ class Admin extends CI_Controller {
 
     private function handle_error($error_message, $native_status) {
         $this->core_client->set_fragment_data('admin_error_messages', ['error_messages' => [$error_message]]);
-        $this->core_client->xmlResponse();
+        $this->core_client->xml_response();
     }
 
     private function handle_result($message, $result) {
         $this->core_client->set_fragment_data('admin_result', ['result' => $message]);
-        $this->core_client->xmlResponse();
+        $this->core_client->xml_response();
     }
 }

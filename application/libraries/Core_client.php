@@ -13,21 +13,21 @@ class Core_client {
 
     public function __construct() {
         $this->CI = & get_instance();
-        $this->clearMessages();
-        $this->clearFragmentsData();
+        $this->clear_messages();
+        $this->clear_fragments_data();
     }
 
     /**
      * Clean all messages
      */
-    public function clearMessages() {
+    public function clear_messages() {
         $this->messages = [];
     }
 
     /**
      * Clean fragments data
      */
-    public function clearFragmentsData() {
+    public function clear_fragments_data() {
         $this->fragments_data = [];
     }
 
@@ -60,28 +60,28 @@ class Core_client {
      *                              - location:
      *                                  - href
      */
-    public function addMessage($message) {
+    public function add_message($message) {
         $this->messages[] = $message;
     }
 
     /**
      * Prepare xml response
      */
-    public function xmlResponse() {
+    public function xml_response() {
         $xml = new SimpleXMLElement('<response/>');
 
         // Fragments
-        $this->addUpdateFragmentsToXml($xml);
+        $this->add_update_fragments_to_xml($xml);
 
         // Messages
-        $this->addMessagesToXml($xml);
+        $this->add_messages_to_xml($xml);
         foreach ($this->messages as $message) {
             switch ($message['type']) {
                 case 'console':
-                    $this->addConsoleOutputToXml($xml, $message);
+                    $this->add_console_output_to_xml($xml, $message);
                     break;
                 case 'location':
-                    $this->addLocationOutputToXml($xml, $message);
+                    $this->add_location_output_to_xml($xml, $message);
                     break;
             }
         }
@@ -91,7 +91,7 @@ class Core_client {
                 ->set_output($xml->asXML());
     }
 
-    private function addUpdateFragmentsToXml(&$xml) {
+    private function add_update_fragments_to_xml(&$xml) {
         $update = $this->CI->input->post('update');
         if ($update == null) {
             return;
@@ -100,7 +100,7 @@ class Core_client {
         $fragments = explode(' ', $update);
         foreach ($fragments as $fragment) {
             $xml->fragments->$fragment = null;
-            $this->addCData($xml->fragments->$fragment, $this->CI->load->view('fragments/' . $fragment, isset($this->fragments_data[$fragment]) ? $this->fragments_data[$fragment] : null, true));
+            $this->add_cdata($xml->fragments->$fragment, $this->CI->load->view('fragments/' . $fragment, isset($this->fragments_data[$fragment]) ? $this->fragments_data[$fragment] : null, true));
             if (isset($this->fragments_data[$fragment]['post_update_action'])) {
                 $xml->fragments->$fragment['post_update_action'] = $this->fragments_data[$fragment]['post_update_action'];
             }
@@ -110,16 +110,16 @@ class Core_client {
         }
     }
 
-    private function addMessagesToXml(&$xml) {
+    private function add_messages_to_xml(&$xml) {
         $xml->messages = new SimpleXMLElement('<messages/>');
     }
 
-    private function addConsoleOutputToXml(&$xml, $message) {
+    private function add_console_output_to_xml(&$xml, $message) {
         if (!isset($message['metadata']['message'])) {
             return;
         }
         $console = $xml->messages->addChild('console');
-        $this->addCData($console, $message['metadata']['message']);
+        $this->add_cdata($console, $message['metadata']['message']);
         $level = (isset($message['metadata']['level'])) ? $message['metadata']['level'] : 'log';
         if (!in_array($level, ['log', 'warn', 'error'])) {
             $level = 'log';
@@ -127,15 +127,15 @@ class Core_client {
         $console['level'] = $level;
     }
 
-    private function addLocationOutputToXml(&$xml, $message) {
+    private function add_location_output_to_xml(&$xml, $message) {
         if (!isset($message['metadata']['href'])) {
             return;
         }
         $location = $xml->messages->addChild('location');
-        $this->addCData($location, $message['metadata']['href']);
+        $this->add_cdata($location, $message['metadata']['href']);
     }
 
-    private function addCData(&$root, $cdataText) {
+    private function add_cdata(&$root, $cdataText) {
         $node = dom_import_simplexml($root);
         $no = $node->ownerDocument;
         $node->appendChild($no->createCDATASection($cdataText));

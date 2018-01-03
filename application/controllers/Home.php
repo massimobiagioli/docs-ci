@@ -75,7 +75,7 @@ class Home extends CI_Controller {
         ];
         $this->core_client->set_fragment_data('home_search_results', $params, 'renderDataTable', 'search_results_datatable');
         if ($flush_xml_response) {
-            $this->core_client->xmlResponse();
+            $this->core_client->xml_response();
         }
     }
 
@@ -193,7 +193,7 @@ class Home extends CI_Controller {
             $data['document'] = $result['doc'];
         }
         $this->core_client->set_fragment_data('home_dlg_document_info_body', $data);
-        $this->core_client->xmlResponse();
+        $this->core_client->xml_response();
     }
     
     public function prepare_document_delete_dialog($document_id) {
@@ -210,7 +210,7 @@ class Home extends CI_Controller {
             $data['document'] = $result['doc'];
         }
         $this->core_client->set_fragment_data('home_dlg_document_delete_body', $data);
-        $this->core_client->xmlResponse();
+        $this->core_client->xml_response();
     }
     
     public function confirm_delete_document() {
@@ -233,12 +233,12 @@ class Home extends CI_Controller {
 
     private function handle_error($error_message, $native_status) {
         $this->core_client->set_fragment_data('home_error_messages', ['error_messages' => [$error_message]]);
-        $this->core_client->xmlResponse();
+        $this->core_client->xml_response();
     }
 
     private function handle_result($message, $result) {
         $this->core_client->set_fragment_data('home_result', ['result' => $message]);
-        $this->core_client->xmlResponse();
+        $this->core_client->xml_response();
     }
     
 }

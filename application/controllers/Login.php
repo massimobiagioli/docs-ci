@@ -33,7 +33,7 @@ class Login extends CI_Controller {
         // Store logged user in session
         if ($result) {
             $this->session->set_userdata(['logged_user' => $result]);
-            $this->core_client->addMessage([
+            $this->core_client->add_message([
                 'type' => 'location',
                 'metadata' => [
                     'href' => site_url('home')
@@ -49,7 +49,7 @@ class Login extends CI_Controller {
         }
         
         // Handle response
-        $this->core_client->xmlResponse();
+        $this->core_client->xml_response();
     }
 
 }
