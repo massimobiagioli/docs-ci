@@ -16,7 +16,7 @@ class Storage_factory {
      * @param string $provider Provider (filestack|... )
      * @return Storage or null
      */
-    public static function client($provider) {
+    public function client($provider) {
         if (!isset(self::$providers[$provider])) {
             return null;
         }

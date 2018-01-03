@@ -16,7 +16,7 @@ class Dms_factory {
      * @param string $provider Provider (elastic|... )
      * @return Dms or null
      */
-    public static function client($provider) {
+    public function client($provider) {
         if (!isset(self::$providers[$provider])) {
             return null;
         }
